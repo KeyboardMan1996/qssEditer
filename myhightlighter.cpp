@@ -22,22 +22,22 @@ void myHightLighter::highlightBlock(const QString &text)
 
     }
 
-    for(int i = 0;i < caseWords.size();i++) //¸ßÁÁ¹Ø¼ü×Ö
+    for(int i = 0;i < caseWords.size();i++) //é«˜äº®å…³é”®å­—
     {
         highlightCaseWord(caseWords.at(i),text);
     }
 }
 /*
-*¸ßÁÁÒ»¸ö¹Ø¼ü×Ö
-* @word ¹Ø¼ü×Ö
-* @format ¸ßÁÁ¹æÔò
-* &text ÎÄ±¾¿é
+*é«˜äº®ä¸€ä¸ªå…³é”®å­—
+* @word å…³é”®å­—
+* @format é«˜äº®è§„åˆ™
+* &text æ–‡æœ¬å—
 */
 void myHightLighter::highlightCaseWord(const QString &word,const QTextCharFormat &format,const QString &text)
 {
 
-    QRegularExpression regularExpression(word);
-    QRegularExpressionMatchIterator i = regularExpression.globalMatch(text);
+    QRegularExpression regularExpression(word);    //åˆ›å»ºæ­£åˆ™è¡¨è¾¾å¼
+    QRegularExpressionMatchIterator i = regularExpression.globalMatch(text);    //åŒ¹é…æ­£åˆ™è¡¨è¾¾å¼
 
     while(i.hasNext())
     {
@@ -48,9 +48,9 @@ void myHightLighter::highlightCaseWord(const QString &word,const QTextCharFormat
 
 }
 /*
-*¸ßÁÁÒ»¸ö¹Ø¼ü×Ö
-* @word ¹Ø¼ü×Ö
-* &text ÎÄ±¾¿é
+*é«˜äº®ä¸€ä¸ªå…³é”®å­—
+* @word å…³é”®å­—
+* &text æ–‡æœ¬å—
 */
 void myHightLighter::highlightCaseWord(const QString &word, const QString &text)
 {

@@ -52,10 +52,10 @@
 #include "myhightlighter.h"
 #include "codeeditor.h"
 /*
-*¹Ø¼ü´Ê²¹È«Ë¼Â·
-* Ê¹ÓÃqtextdocumentµÄcontentChangeº¯Êı¼ì²âÎÄ±¾±»¸Ä±ä
-* Ê¹ÓÃfindBlockÑ°ÕÒ±»ĞŞ¸ÄµÄÎÄ±¾¿é
-* Ê¹ÓÃqtextcursor²åÈëÎÄ±¾
+*å…³é”®è¯è¡¥å…¨æ€è·¯
+* ä½¿ç”¨qtextdocumentçš„contentChangeå‡½æ•°æ£€æµ‹æ–‡æœ¬è¢«æ”¹å˜
+* ä½¿ç”¨findBlockå¯»æ‰¾è¢«ä¿®æ”¹çš„æ–‡æœ¬å—
+* ä½¿ç”¨qtextcursoræ’å…¥æ–‡æœ¬
 */
 
 int main(int argv, char **args)

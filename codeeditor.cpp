@@ -50,6 +50,7 @@
 
 #include <QtWidgets>
 #include <qdebug.h>
+#include <qglobal.h>
 #include "codeeditor.h"
 
 //![constructor]
@@ -61,13 +62,14 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+    connect(this->document(),SIGNAL(contentsChange(int,int,int)),SLOT(inserChanged(int,int,int)));
+    connect(&matchWordThrad,SIGNAL(matchCaseWordFinished(QList<QString>,QList<QString>)),this,SLOT(matchFinished(QList<QString>,QList<QString>)));
+
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
 
     listWidget = new QListWidget(this);
-    listWidget->addItem("test");
-    listWidget->addItem("test");
     listWidget->hide();
 }
 
@@ -174,13 +176,13 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignRight, number);
         }
-        /*���Թ��*/
-        QTextCursor cursor = this->textCursor();
-        if(block.blockNumber() == cursor.block().blockNumber())
-        {
-            listWidget->move(cursor.positionInBlock()*fontMetrics().width('a')+lineNumberAreaWidth(),top +fontMetrics().height() );
-            listWidget->show();
-        }
+        /*²âÊÔ¹â±ê*/
+//        QTextCursor cursor = this->textCursor();
+//        if(block.blockNumber() == cursor.block().blockNumber())
+//        {
+//            listWidget->move(cursor.positionInBlock()*fontMetrics().width('a')+lineNumberAreaWidth(),top +fontMetrics().height() );
+//            listWidget->show();
+//        }
 
         block = block.next();
         top = bottom;
@@ -191,11 +193,44 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 
 
 }
-//![extraAreaPaintEvent_2]
-
-void  CodeEditor::tChanged(const QString text)
+/*
+*文本改变事件
+* @position 插入位置
+* @charsRemoved 删除字符的个数
+* @charsAdded 增加字符的个数
+* 在这个事件里取词，根据光标的位置，取当前输入的单词
+*/
+void  CodeEditor::inserChanged(int position, int charsRemoved, int charsAdded)
 {
-    listWidget->show();
-    listWidget->move(30,30);
+    QTextCursor cursor = this->textCursor();        //获取当前文本光标
+    QString blockText = cursor.block().text();      //获取光标所在文本块的文本
+    blockText = blockText.left(cursor.positionInBlock());   //获取光标之前的文本
 
+    int lastSpaseIndex = blockText.lastIndexOf(" ");    //获取语句最后一个空格符
+    int lastEndIndex = blockText.lastIndexOf(";");      //获取语句最后一个分号
+    int lastIndex = qMax(lastEndIndex,lastSpaseIndex);  //判断哪个个在最后
+
+    QString word = blockText.right(blockText.size() - lastIndex -1);
+
+    matchWordThrad.setMatchWord(word);
+}
+/*
+*关键字匹配完成槽
+* 将关键字放入listwidget中
+* 如果没有匹配的关键字，则隐藏listwidget
+* @vipCaseWords 完全匹配的关键字
+* @lowCaseWords 模糊匹配的关键字
+*/
+void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCaseWords)
+{
+    if(vipCaseWords.size() == 0 && lowCaseWords.size() == 0)
+    {
+        listWidget->hide();
+        return;
+    }
+
+    listWidget->clear();
+    listWidget->addItems(vipCaseWords);
+    listWidget->addItems(lowCaseWords);
+    listWidget->show();
 }

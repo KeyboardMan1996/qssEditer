@@ -11,9 +11,9 @@ public:
     myHightLighter(QTextDocument *parent);
     QList<QString> caseWords;
 protected:
-    void highlightBlock(const QString &text); //¸ßÁÁ¹æÔòÉèÖÃ
+    void highlightBlock(const QString &text); //é«˜äº®è§„åˆ™è®¾ç½®
 private:
-    void highlightCaseWord(const QString &word,const QString &text);    //¸ßÁÁ¹Ø¼ü×Ö
+    void highlightCaseWord(const QString &word,const QString &text);    //é«˜äº®å…³é”®å­—
     void highlightCaseWord(const QString &word,const QTextCharFormat &format,const QString &text);
 };
 

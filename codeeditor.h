@@ -54,6 +54,9 @@
 #include <QPlainTextEdit>
 #include <QObject>
 #include <QListWidget>
+#include <QThread>
+#include <QMutex>
+#include "matchwordsthrea.h"
 
 QT_BEGIN_NAMESPACE
 class QPaintEvent;
@@ -78,14 +81,17 @@ public:
     QListWidget *listWidget;
 protected:
     void resizeEvent(QResizeEvent *event) override;
+    void run();
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &, int);
-    void tChanged(const QString text);
+    void inserChanged(int position, int charsRemoved, int charsAdded);
+    void matchFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords);
 
 private:
+    MatchWordsThread matchWordThrad;
     QWidget *lineNumberArea;
 };
 
