@@ -55,6 +55,7 @@
 *关键词补全思路
 * 使用qtextdocument的contentChange函数检测文本被改变
 * 使用findBlock寻找被修改的文本块
+* 使用qtextcursor插入文本
 */
 
 int main(int argv, char **args)

@@ -49,7 +49,7 @@
 ****************************************************************************/
 
 #include <QtWidgets>
-
+#include <qdebug.h>
 #include "codeeditor.h"
 
 //![constructor]
@@ -66,8 +66,8 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     highlightCurrentLine();
 
     listWidget = new QListWidget(this);
-    listWidget->addItem("²âÊÔ");
-    listWidget->addItem("²âÊÔ");
+    listWidget->addItem("test");
+    listWidget->addItem("test");
     listWidget->hide();
 }
 
@@ -174,12 +174,22 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignRight, number);
         }
+        /*²âÊÔ¹â±ê*/
+        QTextCursor cursor = this->textCursor();
+        if(block.blockNumber() == cursor.block().blockNumber())
+        {
+            listWidget->move(cursor.positionInBlock()*fontMetrics().width('a')+lineNumberAreaWidth(),top +fontMetrics().height() );
+            listWidget->show();
+        }
 
         block = block.next();
         top = bottom;
         bottom = top + (int) blockBoundingRect(block).height();
         ++blockNumber;
     }
+
+
+
 }
 //![extraAreaPaintEvent_2]
 

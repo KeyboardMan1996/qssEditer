@@ -8,51 +8,24 @@ myHightLighter::myHightLighter(QTextDocument *parent)
 
 void myHightLighter::highlightBlock(const QString &text)
 {
-//    QTextCharFormat myClassFormat;
-//    myClassFormat.setFontWeight(QFont::Bold);
-//    myClassFormat.setForeground(Qt::darkMagenta);
+    QTextCharFormat myClassFormat;
+    myClassFormat.setFontWeight(QFont::Bold);
+    myClassFormat.setForeground(Qt::darkMagenta);
 
-//    QRegularExpression regularExpression("int\\s+.+;");
-//    QRegularExpressionMatchIterator i = regularExpression.globalMatch(text);
+    QRegularExpression regularExpression("int\\s+.+;");
+    QRegularExpressionMatchIterator i = regularExpression.globalMatch(text);
 
-//    while(i.hasNext())
-//    {
-//        QRegularExpressionMatch match = i.next();
-//        setFormat(match.capturedStart(),match.capturedLength(),myClassFormat);
+    while(i.hasNext())
+    {
+        QRegularExpressionMatch match = i.next();
+        setFormat(match.capturedStart(),match.capturedLength(),myClassFormat);
 
-//    }
+    }
 
-//    for(int i = 0;i < caseWords.size();i++) //高亮关键字
-//    {
-//        highlightCaseWord(caseWords.at(i),text);
-//    }
-    QTextCharFormat multiLineCommentFormat;
-     multiLineCommentFormat.setForeground(Qt::red);
-
-     QRegularExpression startExpression("/\\*");
-     QRegularExpression endExpression("\\*/");
-
-     setCurrentBlockState(0);
-
-     int startIndex = 0;
-     if (previousBlockState() != 1)
-         startIndex = text.indexOf(startExpression);
-
-     while (startIndex >= 0) {
-        QRegularExpressionMatch endMatch;
-        int endIndex = text.indexOf(endExpression, startIndex, &endMatch);
-        int commentLength;
-        if (endIndex == -1) {
-            setCurrentBlockState(1);
-            commentLength = text.length() - startIndex;
-        } else {
-            commentLength = endIndex - startIndex
-                            + endMatch.capturedLength();
-        }
-        setFormat(startIndex, commentLength, multiLineCommentFormat);
-        startIndex = text.indexOf(startExpression,
-                                  startIndex + commentLength);
-     }
+    for(int i = 0;i < caseWords.size();i++) //高亮关键字
+    {
+        highlightCaseWord(caseWords.at(i),text);
+    }
 }
 /*
 *高亮一个关键字
