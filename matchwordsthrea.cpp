@@ -1,13 +1,20 @@
 #include "matchwordsthrea.h"
+#include <QMetaType>
 
 MatchWordsThread::MatchWordsThread()
 {
+
     caseWords.append("int");
     caseWords.append("widget");
     caseWords.append("if");
     caseWords.append("else");
     caseWords.append("while");
     caseWords.append("listwidget");
+    qRegisterMetaType<QList<QString>>("QList<QString>");
+}
+MatchWordsThread::~MatchWordsThread()
+{
+
 }
 /*
 *设置要匹配的关键字，并开始匹配

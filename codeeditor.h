@@ -57,6 +57,9 @@
 #include <QThread>
 #include <QMutex>
 #include "matchwordsthrea.h"
+#include <QKeyEvent>
+
+class CaseWordListWidget;
 
 QT_BEGIN_NAMESPACE
 class QPaintEvent;
@@ -75,13 +78,14 @@ class CodeEditor : public QPlainTextEdit
 
 public:
     CodeEditor(QWidget *parent = 0);
+    ~CodeEditor();
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
-    QListWidget *listWidget;
+    CaseWordListWidget *listWidget;
 protected:
     void resizeEvent(QResizeEvent *event) override;
-    void run();
+    void keyPressEvent(QKeyEvent *event);
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
@@ -91,7 +95,8 @@ private slots:
     void matchFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords);
 
 private:
-    MatchWordsThread matchWordThrad;
+    int caseWordSize;
+    MatchWordsThread *matchWordThrad;
     QWidget *lineNumberArea;
 };
 

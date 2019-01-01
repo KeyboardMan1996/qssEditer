@@ -52,27 +52,36 @@
 #include <qdebug.h>
 #include <qglobal.h>
 #include "codeeditor.h"
+#include "casewordlistwidget.h"
 
 //![constructor]
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
     lineNumberArea = new LineNumberArea(this);
+    matchWordThrad = new MatchWordsThread;
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
     connect(this->document(),SIGNAL(contentsChange(int,int,int)),SLOT(inserChanged(int,int,int)));
-    connect(&matchWordThrad,SIGNAL(matchCaseWordFinished(QList<QString>,QList<QString>)),this,SLOT(matchFinished(QList<QString>,QList<QString>)));
+    bool test = connect(matchWordThrad,SIGNAL(matchCaseWordFinished(QList<QString>,QList<QString>)),this,SLOT(matchFinished(QList<QString>,QList<QString>)));
 
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
 
-    listWidget = new QListWidget(this);
+    listWidget = new CaseWordListWidget(this);
     listWidget->hide();
 }
 
+CodeEditor::~CodeEditor()
+{
+    matchWordThrad->terminate(); //终止线程
+    matchWordThrad->wait();     //等待线程终止
+    delete matchWordThrad;
+
+}
 //![constructor]
 
 //![extraAreaWidth]
@@ -176,13 +185,11 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignRight, number);
         }
-        /*²âÊÔ¹â±ê*/
-//        QTextCursor cursor = this->textCursor();
-//        if(block.blockNumber() == cursor.block().blockNumber())
-//        {
-//            listWidget->move(cursor.positionInBlock()*fontMetrics().width('a')+lineNumberAreaWidth(),top +fontMetrics().height() );
-//            listWidget->show();
-//        }
+        QTextCursor cursor = this->textCursor();
+        if(block.blockNumber() == cursor.block().blockNumber())
+        {
+            listWidget->move(cursor.positionInBlock()*fontMetrics().width('a')+lineNumberAreaWidth(),top +fontMetrics().height() );
+        }
 
         block = block.next();
         top = bottom;
@@ -211,8 +218,14 @@ void  CodeEditor::inserChanged(int position, int charsRemoved, int charsAdded)
     int lastIndex = qMax(lastEndIndex,lastSpaseIndex);  //判断哪个个在最后
 
     QString word = blockText.right(blockText.size() - lastIndex -1);
+    if(word.isNull())  //如果关键字为空
+    {
+        listWidget->hide();
+    }else {
+        caseWordSize = word.size();
+        matchWordThrad->setMatchWord(word);
+    }
 
-    matchWordThrad.setMatchWord(word);
 }
 /*
 *关键字匹配完成槽
@@ -233,4 +246,31 @@ void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCa
     listWidget->addItems(vipCaseWords);
     listWidget->addItems(lowCaseWords);
     listWidget->show();
+}
+/*
+*键盘按下事件
+*/
+void CodeEditor::keyPressEvent(QKeyEvent *event)
+{
+    if(!listWidget->isHidden())
+    {
+        if(event->key() == Qt::Key_Up               //传入上下按键
+                ||event->key() == Qt::Key_Down)
+        {
+            listWidget->keyPressEvent(event);
+            return;
+        }
+        if(event->text() == "\r")               //如果是回车符，则键入关键字
+        {
+            QString caseWord = listWidget->currentItem()->text();           //获取当前关键字
+            QTextCursor cursor = this->textCursor();            //获取光标信息
+
+            cursor.insertText(caseWord);    //插入关键字
+            this->setTextCursor(cursor);    //设置光标信息
+            return;
+        }
+
+    }
+
+    QPlainTextEdit::keyPressEvent(event);
 }

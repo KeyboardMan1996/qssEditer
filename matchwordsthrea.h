@@ -9,6 +9,7 @@ class MatchWordsThread:public QThread
     Q_OBJECT
 public:
     MatchWordsThread();
+    ~MatchWordsThread();
     QList<QString> caseWords;
     void setMatchWord(const QString &word);
 private:
@@ -17,7 +18,7 @@ private:
 protected:
     void run();
 signals:
-    void matchCaseWordFinished(QList<QString>,QList<QString>);
+    void matchCaseWordFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords);
 };
 
 #endif // MATCHWORDSTHREA_H
