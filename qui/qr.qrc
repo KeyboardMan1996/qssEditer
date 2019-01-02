@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/close.png</file>
+        <file>images/max.png</file>
+        <file>images/mini.png</file>
+        <file>images/close_hover.png</file>
+        <file>images/max_hover.png</file>
+        <file>images/mini_hover.png</file>
+        <file>images/open.png</file>
+        <file>images/save.png</file>
+        <file>images/seting.png</file>
+        <file>images/close_hover1.png</file>
+        <file>images/close1.png</file>
+        <file>images/ico_02.png</file>
+        <file>images/run.png</file>
+        <file>images/radioButton_01.png</file>
+        <file>images/radioButton_02.png</file>
+        <file>images/ico_03.png</file>
+        <file>images/ico_04.png</file>
+    </qresource>
+</RCC>

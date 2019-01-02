@@ -53,6 +53,7 @@
 #include <qglobal.h>
 #include "codeeditor.h"
 #include "casewordlistwidget.h"
+#include "myhightlighter.h"
 
 //![constructor]
 
@@ -65,7 +66,7 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
     connect(this->document(),SIGNAL(contentsChange(int,int,int)),SLOT(inserChanged(int,int,int)));
-    bool test = connect(matchWordThrad,SIGNAL(matchCaseWordFinished(QList<QString>,QList<QString>)),this,SLOT(matchFinished(QList<QString>,QList<QString>)));
+    connect(matchWordThrad,SIGNAL(matchCaseWordFinished(QList<QString>,QList<QString>,int)),this,SLOT(matchFinished(QList<QString>,QList<QString>,int)));
 
 
     updateLineNumberAreaWidth(0);
@@ -73,6 +74,9 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     listWidget = new CaseWordListWidget(this);
     listWidget->hide();
+
+    myHightLighter *highLighter = new myHightLighter(this->document());
+
 }
 
 CodeEditor::~CodeEditor()
@@ -95,7 +99,7 @@ int CodeEditor::lineNumberAreaWidth()
         ++digits;
     }
 
-    int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
+    int space = 20 + fontMetrics().width(QLatin1Char('9')) * digits;
 
     return space;
 }
@@ -183,7 +187,7 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
             QString number = QString::number(blockNumber + 1);
             painter.setPen(Qt::black);
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
-                             Qt::AlignRight, number);
+                             Qt::AlignCenter, number);
         }
         QTextCursor cursor = this->textCursor();
         if(block.blockNumber() == cursor.block().blockNumber())
@@ -213,18 +217,7 @@ void  CodeEditor::inserChanged(int position, int charsRemoved, int charsAdded)
     QString blockText = cursor.block().text();      //获取光标所在文本块的文本
     blockText = blockText.left(cursor.positionInBlock());   //获取光标之前的文本
 
-    int lastSpaseIndex = blockText.lastIndexOf(" ");    //获取语句最后一个空格符
-    int lastEndIndex = blockText.lastIndexOf(";");      //获取语句最后一个分号
-    int lastIndex = qMax(lastEndIndex,lastSpaseIndex);  //判断哪个个在最后
-
-    QString word = blockText.right(blockText.size() - lastIndex -1);
-    if(word.size() < 2)  //如果输入少于两个字符
-    {
-        listWidget->hide();
-    }else {
-        caseWordCurrentSize = word.size();
-        matchWordThrad->setMatchWord(word);
-    }
+    matchWordThrad->setMatchWord(blockText);
 
 }
 /*
@@ -234,14 +227,14 @@ void  CodeEditor::inserChanged(int position, int charsRemoved, int charsAdded)
 * @vipCaseWords 完全匹配的关键字
 * @lowCaseWords 模糊匹配的关键字
 */
-void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCaseWords)
+void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCaseWords,int caseWordSize)
 {
     if(vipCaseWords.size() == 0 && lowCaseWords.size() == 0)
     {
         listWidget->hide();
         return;
     }
-
+    this->caseWordCurrentSize = caseWordSize;
     listWidget->clear();
     listWidget->addItems(vipCaseWords);
     listWidget->addItems(lowCaseWords);

@@ -92,7 +92,7 @@ private slots:
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &, int);
     void inserChanged(int position, int charsRemoved, int charsAdded);
-    void matchFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords);
+    void matchFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords,int caseWordSize);
 
 private:
     int caseWordCurrentSize;

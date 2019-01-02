@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>contentUI</class>
+ <widget class="QWidget" name="contentUI">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1132</width>
+    <height>639</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#contentUI{
+background-color: rgb(255, 255, 255);
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,4">
+   <property name="spacing">
+    <number>20</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="menuWidget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#menuWidget{
+	padding-top:20px;
+}
+	
+</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,1">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7" stretch="2,1">
+        <item>
+         <widget class="QToolButton" name="openButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#openButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+    image:url(:images/open.png);
+	margin-top:15px;
+}	
+#openButton:hover{
+	margin-top:10px;
+}
+#openButton:pressed{
+	margin-top:15px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>打开文件</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QToolButton" name="saveButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#saveButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+	image:url(:images/save.png);
+	margin-top:15px;
+}	
+#saveButton:hover{
+	margin-top:10px;
+}
+#saveButton:pressed{
+	margin-top:15px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>保存文件</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QToolButton" name="runButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#runButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+	image:url(:images/run.png);
+	margin-top:15px;
+}	
+#runButton:hover{
+	margin-top:10px;
+}
+#runButton:pressed{
+	margin-top:15px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>运行</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QWidget" name="verticalWidget_5" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QToolButton" name="lookOverButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">#lookOverButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+	image:url(:images/ico_02.png);
+	margin-top:15px;
+}	
+#lookOverButton:hover{
+	margin-top:10px;
+}
+#lookOverButton:pressed{
+	margin-top:15px;
+}</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+             </property>
+             <property name="text">
+              <string>曲线图</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QToolButton" name="setingButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#setingButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+	image:url(:images/seting.png);
+	margin-top:15px;
+}	
+#setingButton:hover{
+	margin-top:10px;
+}
+#setingButton:pressed{
+	margin-top:15px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+          </property>
+          <property name="text">
+           <string>设置</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="styleSheet">
+      <string notr="true">QTabWidget::pane { /* The tab widget frame */
+      border-top: 2px solid #C2C7CB;
+  }
+
+  QTabWidget::tab-bar {
+      left: 50px; /* move to the right by 5px */
+  }
+
+  /* Style the tab using the tab sub-control. Note that
+      it reads QTabBar _not_ QTabWidget */
+  QTabBar::tab {
+      border: solid;
+      border-left-width:3px;
+      border-right-width:3px;
+      border-top-width:3px;
+	  border-color: rgb(85, 170, 255);
+	  background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      min-width: 35ex;
+      padding: 5px;
+      margin-right:3px;
+	
+	font: 75 9pt &quot;微软雅黑&quot;;
+
+  }
+
+  QTabBar::tab:selected, QTabBar::tab:hover {
+	
+	background-color: rgb(98, 213, 255);
+  }
+
+  QTabBar::tab:!selected {
+      margin-top: 2px; /* make non-selected tabs look smaller */
+  }
+
+  /* make use of negative margins for overlapping tabs */
+  QTabBar::tab:selected {
+
+  }
+  QTabWidget::pane { /* The tab widget frame */
+       border-top: 2px solid rgb(85, 170, 255);
+       position: absolute;
+   }
+   QTabBar::close-button {
+    subcontrol-position: bottom ;
+    icon-size:30px 30px;
+    image:url(:/images/close1.png);
+     margin-right: 4px;
+   }
+   QTabBar::close-button:hover{
+     image:url(:/images/close_hover1.png);
+    }
+    QTabBar::close-button:pressed{
+      margin-bottom: -3px;
+      margin-right: 4px;
+     }
+   QTabBar::close-button:!selected {
+     margin-top: 4px;
+     margin-right: 4px;
+   }
+QStackedWidget#qt_tabwidget_stackedwidget {
+    padding-right:5px;
+    padding-left:5px;
+    padding-bottom:5px;
+ }
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>首页</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Tab 2</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

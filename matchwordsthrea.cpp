@@ -5,16 +5,32 @@
 
 MatchWordsThread::MatchWordsThread()
 {
+    {       //载入css关键字
+        QFile file("./config/caseWord.txt");
+        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
+        {
+            QTextStream stream(&file);
+            while (!stream.atEnd()) {
+                QString line = stream.readLine();
+                caseWords.append(line);
+             }
+        }
 
-    QFile file("./caseWord.txt");
-    if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
-    {
-        QTextStream stream(&file);
-        while (!stream.atEnd()) {
-            QString line = stream.readLine();
-            caseWords.append(line);
-         }
     }
+
+    {       //载入css关键字
+        QFile file("./config/qtClass.txt");
+        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
+        {
+            QTextStream stream(&file);
+            while (!stream.atEnd()) {
+                QString line = stream.readLine();
+                caseWords.append(line);
+             }
+        }
+
+    }
+
 
 
     qRegisterMetaType<QList<QString>>("QList<QString>");  //注册qlist<qstring> 类 使之可以用于信号与槽的参数传递
@@ -25,12 +41,12 @@ MatchWordsThread::~MatchWordsThread()
 }
 /*
 *设置要匹配的关键字，并开始匹配
-* @word 关键字
+* @blockText 光标之前的文本
 */
-void MatchWordsThread::setMatchWord(const QString &word)
+void MatchWordsThread::setMatchWord(const QString &blockText)
 {
     locke.lock();     //锁定互斥锁
-    regularExpresion.setPattern(word +".+");    //添加正则表达式
+    this->blockText = blockText;
     locke.unlock();
     if(isRunning())
         quit();
@@ -42,6 +58,28 @@ void MatchWordsThread::setMatchWord(const QString &word)
 */
 void MatchWordsThread::run()
 {
+    QString word;
+    locke.lock();
+    {              //获取分割位置
+        QRegularExpression rex("\\s");      //寻找最后一个空白符
+        QRegularExpressionMatch match = rex.match(blockText);
+        int lastSpaseIndex = match.lastCapturedIndex();
+        int lastEndIndex = blockText.lastIndexOf(";");      //获取语句最后一个分号
+        int lastIndex = qMax(lastEndIndex,lastSpaseIndex);  //判断哪个个在最后
+        if(lastIndex!=-1)
+            word = blockText.right(blockText.size() - lastIndex -1);
+        else {              //如果没有找到分割符，则传入整个文本块
+            word = blockText;
+        }
+    }
+    locke.unlock();
+
+    if(word.size() < 2)          //如果只有一个字符，则不触发提示
+        return;
+
+    regularExpresion.setPattern(word +".+");    //添加正则表达式
+
+
     QList<QString> vipCaseWords;   //完全匹配的关键字
     QList<QString> lowCaseWords;    //模糊匹配的关键字
     for(int i = 0; i < caseWords.size();i++)    //历遍关键字字典，并匹配
@@ -59,5 +97,5 @@ void MatchWordsThread::run()
         }
 
     }
-     emit matchCaseWordFinished(vipCaseWords,lowCaseWords);
+     emit matchCaseWordFinished(vipCaseWords,lowCaseWords,word.size());
 }

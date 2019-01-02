@@ -5,7 +5,7 @@
 myHightLighter::myHightLighter(QTextDocument *parent)
     :QSyntaxHighlighter(parent)
 {
-    QFile file("./caseWord.txt");
+    QFile file("./config/caseWord.txt");
     if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
     {
         QTextStream stream(&file);
@@ -47,7 +47,7 @@ void myHightLighter::highlightBlock(const QString &text)
 void myHightLighter::highlightCaseWord(const QString &word,const QTextCharFormat &format,const QString &text)
 {
 
-    QRegularExpression regularExpression(word);    //创建正则表达式
+    QRegularExpression regularExpression("\\b" + word +"\\b");    //创建正则表达式
     QRegularExpressionMatchIterator i = regularExpression.globalMatch(text);    //匹配正则表达式
 
     while(i.hasNext())

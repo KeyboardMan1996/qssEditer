@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainUI</class>
+ <widget class="QWidget" name="mainUI">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1153</width>
+    <height>733</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#mainUI{
+
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="menuBar" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#menuBar{
+	
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:1px;
+	border-style:solid;
+	border-top-right-radius:15px;
+	border-top-left-radius:15px;
+}</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="miniButton">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#miniButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+}	
+#miniButton:hover{
+	image:url(:images/mini_hover.png);
+}</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="qr.qrc">
+          <normaloff>:/images/mini.png</normaloff>:/images/mini.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="maxButton">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#maxButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+}	
+#maxButton:hover{
+	image:url(:images/max_hover.png);
+}</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="qr.qrc">
+          <normaloff>:/images/max.png</normaloff>:/images/max.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="closeButton">
+        <property name="minimumSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#closeButton{
+	background-color: rgba(255, 255, 255,0);
+	margin-left:2px;
+	margin-right:2px;
+	border-color: rgba(255, 255, 255,0);
+	border-width:1px;
+	border-style:solid;
+}	
+#closeButton:hover{
+	image:url(:images/close_hover.png);
+}</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="qr.qrc">
+          <normaloff>:/images/close.png</normaloff>:/images/close.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="contentWidget" native="true">
+     <property name="styleSheet">
+      <string notr="true">#contentWidget{
+	background-color: rgb(255, 255, 255);
+	
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-bottom-right-radius:10px;
+	border-bottom-left-radius:10px;
+}</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QWidget" name="menuWidget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">.QPushButton{
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:5px;
+	padding:5px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+.QPushButton:hover{
+	
+	border-color: rgb(255, 255, 255);
+}</string>
+           </property>
+           <property name="text">
+            <string>预览</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">.QPushButton{
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:5px;
+	padding:5px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+.QPushButton:hover{
+	
+	border-color: rgb(255, 255, 255);
+}</string>
+           </property>
+           <property name="text">
+            <string>添加颜色</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">.QPushButton{
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:5px;
+	padding:5px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+.QPushButton:hover{
+	
+	border-color: rgb(255, 255, 255);
+}</string>
+           </property>
+           <property name="text">
+            <string>设置字体</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,3">
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <property name="styleSheet">
+           <string notr="true">.QWidget{
+background-color: rgb(255, 255, 255);
+	
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:10px;
+}</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="CodeEditor" name="codeEditer">
+          <property name="styleSheet">
+           <string notr="true">.CodeEditor{
+
+background-color: rgb(255, 255, 255);
+	
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	borde-radius:10px;
+}</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CodeEditor</class>
+   <extends>QPlainTextEdit</extends>
+   <header>codeeditor.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="qr.qrc"/>
+ </resources>
+ <connections/>
+</ui>

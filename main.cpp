@@ -51,6 +51,7 @@
 #include <QtWidgets>
 #include "myhightlighter.h"
 #include "codeeditor.h"
+#include "qui/mainui.h"
 /*
 *关键词补全思路
 * 使用qtextdocument的contentChange函数检测文本被改变
@@ -61,12 +62,8 @@
 int main(int argv, char **args)
 {
     QApplication app(argv, args);
-
-    CodeEditor editor;
-    editor.setWindowTitle(QObject::tr("Code Editor Example"));
-    myHightLighter mylighter(editor.document());
-    editor.show();
-
+    mainUI ui;
+    ui.show();
     return app.exec();
 }
 
