@@ -1,8 +1,19 @@
 #include "myhightlighter.h"
 #include <QRegularExpression>
+#include <QFile>
+#include <QTextStream>
 myHightLighter::myHightLighter(QTextDocument *parent)
     :QSyntaxHighlighter(parent)
 {
+    QFile file("./caseWord.txt");
+    if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
+    {
+        QTextStream stream(&file);
+        while (!stream.atEnd()) {
+            QString line = stream.readLine();
+            caseWords.append(line);
+         }
+    }
 
 }
 

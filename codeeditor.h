@@ -95,7 +95,7 @@ private slots:
     void matchFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords);
 
 private:
-    int caseWordSize;
+    int caseWordCurrentSize;
     MatchWordsThread *matchWordThrad;
     QWidget *lineNumberArea;
 };

@@ -218,11 +218,11 @@ void  CodeEditor::inserChanged(int position, int charsRemoved, int charsAdded)
     int lastIndex = qMax(lastEndIndex,lastSpaseIndex);  //判断哪个个在最后
 
     QString word = blockText.right(blockText.size() - lastIndex -1);
-    if(word.isNull())  //如果关键字为空
+    if(word.size() < 2)  //如果输入少于两个字符
     {
         listWidget->hide();
     }else {
-        caseWordSize = word.size();
+        caseWordCurrentSize = word.size();
         matchWordThrad->setMatchWord(word);
     }
 
@@ -245,6 +245,7 @@ void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCa
     listWidget->clear();
     listWidget->addItems(vipCaseWords);
     listWidget->addItems(lowCaseWords);
+    listWidget->setCurrentRow(0);
     listWidget->show();
 }
 /*
@@ -264,6 +265,8 @@ void CodeEditor::keyPressEvent(QKeyEvent *event)
         {
             QString caseWord = listWidget->currentItem()->text();           //获取当前关键字
             QTextCursor cursor = this->textCursor();            //获取光标信息
+
+            cursor.movePosition(QTextCursor::Left,QTextCursor::KeepAnchor,caseWordCurrentSize);
 
             cursor.insertText(caseWord);    //插入关键字
             this->setTextCursor(cursor);    //设置光标信息

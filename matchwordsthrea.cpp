@@ -1,16 +1,23 @@
 #include "matchwordsthrea.h"
 #include <QMetaType>
+#include <QFile>
+#include <QTextStream>
 
 MatchWordsThread::MatchWordsThread()
 {
 
-    caseWords.append("int");
-    caseWords.append("widget");
-    caseWords.append("if");
-    caseWords.append("else");
-    caseWords.append("while");
-    caseWords.append("listwidget");
-    qRegisterMetaType<QList<QString>>("QList<QString>");
+    QFile file("./caseWord.txt");
+    if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
+    {
+        QTextStream stream(&file);
+        while (!stream.atEnd()) {
+            QString line = stream.readLine();
+            caseWords.append(line);
+         }
+    }
+
+
+    qRegisterMetaType<QList<QString>>("QList<QString>");  //注册qlist<qstring> 类 使之可以用于信号与槽的参数传递
 }
 MatchWordsThread::~MatchWordsThread()
 {
