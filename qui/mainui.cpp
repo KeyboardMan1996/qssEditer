@@ -14,6 +14,8 @@ mainUI::mainUI(QWidget *parent) :
     contentLayout = new QHBoxLayout;
     contentLayout->setMargin(0);
     ui->contentWidget->setLayout(contentLayout);
+
+    currentWidget = new QWidget;
 }
 
 mainUI::~mainUI()
@@ -104,3 +106,9 @@ QString mainUI::makeColorString(const QColor &color, const QString type)
     return "erro";
 }
 
+
+void mainUI::on_comboBox_currentIndexChanged(int index)
+{
+    ui->widget->layout()->removeWidget(currentWidget);
+   // delete currentWidget;
+}

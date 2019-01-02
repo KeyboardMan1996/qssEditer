@@ -217,6 +217,175 @@
           <number>0</number>
          </property>
          <item>
+          <widget class="QWidget" name="widget_2" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">.QLabel{
+background-color: rgb(255, 255, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+	padding:10px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}</string>
+              </property>
+              <property name="text">
+               <string>预览控件</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>132123</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">.QComboBox{
+	background-color: rgb(255, 255, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-left-width:0px;
+	border-style:solid;
+	border-top-right-radius:10px;
+	border-bottom-right-radius:10px;
+	padding:10px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+QComboBox:!editable, QComboBox::drop-down:editable {
+      background-color: rgb(255, 255, 255,200);
+}
+
+/* QComboBox gets the &quot;on&quot; state when the popup is open */
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+      background-color: rgb(238, 238, 238,200);
+}
+
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+
+    border-left-width: 2px;
+    
+	border-color: rgb(85, 170, 255);
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+    background: rgba(255, 255, 255, 0);
+}
+
+QComboBox::down-arrow {
+    image: url(:/images/ico_01.png);
+    background: rgba(255, 255, 255, 0);
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+    background: rgba(255, 255, 255, 0);
+}
+QComboBox QAbstractItemView::item {
+     color: rgb(8, 8, 8);
+     min-height: 20px;
+     background-color: rgb(238, 238, 238,150);
+     padding: 1px 18px 1px 15px;
+}
+QComboBox QAbstractItemView::item::hover{
+     min-height: 20px;
+     background-color:rgb(222, 222, 222.150);
+}
+QAbstractItemView{
+     border: 2px solid;
+     border-bottom-right-radius: 3px;
+     border-bottom-left-radius: 3px;
+	 background-color: rgb(85, 170, 255);
+     min-height: 20px;
+     background: rgba(255, 255, 255, 200);
+}</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>新建项目</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>新建项目</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>新建项目</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>新建项目</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -260,6 +429,74 @@
            </property>
            <property name="text">
             <string>预览</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">.QPushButton{
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:5px;
+	padding:5px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+.QPushButton:hover{
+	
+	border-color: rgb(255, 255, 255);
+}</string>
+           </property>
+           <property name="text">
+            <string>添加字体</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">.QPushButton{
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:5px;
+	padding:5px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+.QPushButton:hover{
+	
+	border-color: rgb(255, 255, 255);
+}</string>
+           </property>
+           <property name="text">
+            <string>添加图片</string>
            </property>
           </widget>
          </item>
@@ -339,7 +576,7 @@
         <item>
          <widget class="QWidget" name="widget" native="true">
           <property name="styleSheet">
-           <string notr="true">.QWidget{
+           <string notr="true">#widget{
 background-color: rgb(255, 255, 255);
 	
 	border-color: rgb(85, 170, 255);

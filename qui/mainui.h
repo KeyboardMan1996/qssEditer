@@ -21,6 +21,7 @@ private:
     bool mousePress;
     QPoint mousePoint;
     QString makeColorString(const QColor &color, const QString type);
+    QWidget *currentWidget;
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -35,6 +36,8 @@ private slots:
     void on_pushButton_2_clicked();
 
     void on_pushButton_clicked();
+
+    void on_comboBox_currentIndexChanged(int index);
 
 private:
     Ui::mainUI *ui;
