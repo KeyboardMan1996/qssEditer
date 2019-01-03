@@ -58,6 +58,7 @@
 #include <QMutex>
 #include "matchwordsthrea.h"
 #include <QKeyEvent>
+#include <setting.h>
 
 class CaseWordListWidget;
 
@@ -79,25 +80,25 @@ class CodeEditor : public QPlainTextEdit
 public:
     CodeEditor(QWidget *parent = 0);
     ~CodeEditor();
-
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
     CaseWordListWidget *listWidget;
+    void setFont(const QFont &font);
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void keyPressEvent(QKeyEvent *event);
-
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
     void highlightCurrentLine();
     void updateLineNumberArea(const QRect &, int);
     void inserChanged(int position, int charsRemoved, int charsAdded);
     void matchFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords,int caseWordSize);
+    void hideLisetWidget();
 
 private:
-    int caseWordCurrentSize;
-    MatchWordsThread *matchWordThrad;
-    QWidget *lineNumberArea;
+    int caseWordCurrentSize;            //键入关键字的长度
+    MatchWordsThread *matchWordThrad;   //关键字查找线程
+    QWidget *lineNumberArea;            //行号显示区域
 };
 
 //![codeeditordefinition]

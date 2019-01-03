@@ -67,15 +67,15 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
     connect(this->document(),SIGNAL(contentsChange(int,int,int)),SLOT(inserChanged(int,int,int)));
     connect(matchWordThrad,SIGNAL(matchCaseWordFinished(QList<QString>,QList<QString>,int)),this,SLOT(matchFinished(QList<QString>,QList<QString>,int)));
-
+    connect(matchWordThrad,SIGNAL(hideListWidget()),this,SLOT(hideLisetWidget()));
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
 
-    listWidget = new CaseWordListWidget(this);
+    listWidget = new CaseWordListWidget(this);      //关键字提示窗口
     listWidget->hide();
 
-    myHightLighter *highLighter = new myHightLighter(this->document());
+    myHightLighter *highLighter = new myHightLighter(this->document());         //设置高亮器
 
 }
 
@@ -189,12 +189,6 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignCenter, number);
         }
-        QTextCursor cursor = this->textCursor();
-        if(block.blockNumber() == cursor.block().blockNumber())
-        {
-            listWidget->move(cursor.positionInBlock()*fontMetrics().width('a')+lineNumberAreaWidth(),top +fontMetrics().height() );
-        }
-
         block = block.next();
         top = bottom;
         bottom = top + (int) blockBoundingRect(block).height();
@@ -239,6 +233,25 @@ void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCa
     listWidget->addItems(vipCaseWords);
     listWidget->addItems(lowCaseWords);
     listWidget->setCurrentRow(0);
+    //设置listwidget的位置
+    QTextBlock block = firstVisibleBlock();
+    QTextCursor cursor = this->textCursor();
+    QTextBlock cursorBlock = cursor.block();
+    int l = 1;
+    while(block != cursorBlock)     //获取文本块在当前显示区域是第几行
+    {
+        l++;
+        block = block.next();
+    }
+    int y = l * fontMetrics().height() +3;
+  //  int x = 3 + cursor.positionInBlock() *fontMetrics().width('a');
+    int x = 3;
+    QString text = QString(cursorBlock.text()).left(cursor.positionInBlock());
+    for(int i = 0; i < text.size();i++)         //获取光标前所有字符相加的宽度，用于关键字提示框的位置
+    {
+        x = x + fontMetrics().width(text.at(i));
+    }
+    listWidget->move(x,y);
     listWidget->show();
 }
 /*
@@ -267,6 +280,25 @@ void CodeEditor::keyPressEvent(QKeyEvent *event)
         }
 
     }
+    //按下tab按键不键入tab符，而是键入连续的空格，可以解决无法获取tab符实际长度的问题
+    if(event->key() == Qt::Key_Tab)
+    {
+        QTextCursor cursor = this->textCursor();
+        cursor.insertText("     ");
+        this->setTextCursor(cursor);
+        return;
+    }
 
     QPlainTextEdit::keyPressEvent(event);
+}
+//隐藏关键词提示的listwiget
+void CodeEditor::hideLisetWidget()
+{
+    listWidget->hide();
+}
+//重写字体设置函数
+void CodeEditor::setFont(const QFont &font)
+{
+    QPlainTextEdit::setFont(font);
+    listWidget->setFont(font);
 }

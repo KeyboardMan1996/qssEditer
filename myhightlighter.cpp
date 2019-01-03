@@ -5,14 +5,29 @@
 myHightLighter::myHightLighter(QTextDocument *parent)
     :QSyntaxHighlighter(parent)
 {
-    QFile file("./config/caseWord.txt");
-    if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
-    {
-        QTextStream stream(&file);
-        while (!stream.atEnd()) {
-            QString line = stream.readLine();
-            caseWords.append(line);
-         }
+    {       //载入css关键字
+        QFile file("./config/caseWord.txt");
+        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
+        {
+            QTextStream stream(&file);
+            while (!stream.atEnd()) {
+                QString line = stream.readLine();
+                caseWords.append(line);
+             }
+        }
+    }
+
+    {      //载入qt类名
+        QFile file("./config/qtClass.txt");
+        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
+        {
+            QTextStream stream(&file);
+            while (!stream.atEnd()) {
+                QString line = stream.readLine();
+                qtClassNames.append(line);
+             }
+        }
+
     }
 
 }
@@ -33,9 +48,16 @@ void myHightLighter::highlightBlock(const QString &text)
 
     }
 
-    for(int i = 0;i < caseWords.size();i++) //高亮关键字
+    for(int i = 0;i < qtClassNames.size();i++) //高亮qt类名
     {
-        highlightCaseWord(caseWords.at(i),text);
+        highlightCaseWord(qtClassNames.at(i),text);
+    }
+    for(int i = 0;i < caseWords.size();i++)
+    {
+        QTextCharFormat f;
+        f.setFontWeight(QFont::Bold);
+        f.setForeground(Qt::darkRed);
+        highlightCaseWord(caseWords.at(i),f,text);
     }
 }
 /*
@@ -47,7 +69,7 @@ void myHightLighter::highlightBlock(const QString &text)
 void myHightLighter::highlightCaseWord(const QString &word,const QTextCharFormat &format,const QString &text)
 {
 
-    QRegularExpression regularExpression("\\b" + word +"\\b");    //创建正则表达式
+    QRegularExpression regularExpression("\\b" + word +"\\b",QRegularExpression::CaseInsensitiveOption);    //创建正则表达式
     QRegularExpressionMatchIterator i = regularExpression.globalMatch(text);    //匹配正则表达式
 
     while(i.hasNext())

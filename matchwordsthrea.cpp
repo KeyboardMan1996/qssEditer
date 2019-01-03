@@ -2,6 +2,7 @@
 #include <QMetaType>
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 
 MatchWordsThread::MatchWordsThread()
 {
@@ -61,13 +62,15 @@ void MatchWordsThread::run()
     QString word;
     locke.lock();
     {              //获取分割位置
-        QRegularExpression rex("\\s");      //寻找最后一个空白符
-        QRegularExpressionMatch match = rex.match(blockText);
-        int lastSpaseIndex = match.lastCapturedIndex();
-        int lastEndIndex = blockText.lastIndexOf(";");      //获取语句最后一个分号
-        int lastIndex = qMax(lastEndIndex,lastSpaseIndex);  //判断哪个个在最后
-        if(lastIndex!=-1)
-            word = blockText.right(blockText.size() - lastIndex -1);
+        QRegularExpression rex("\\s|:|;|\\.|#");      //寻找最后一个空白符
+        QRegularExpressionMatchIterator i = rex.globalMatch(blockText);
+        QRegularExpressionMatch match;
+        while (i.hasNext()) {
+            match = i.next();
+        }
+        int lastSpaseIndex = match.capturedEnd();
+        if(lastSpaseIndex!=-1)
+            word = blockText.right(blockText.size() - lastSpaseIndex);
         else {              //如果没有找到分割符，则传入整个文本块
             word = blockText;
         }
@@ -75,9 +78,12 @@ void MatchWordsThread::run()
     locke.unlock();
 
     if(word.size() < 2)          //如果只有一个字符，则不触发提示
+    {
+        emit hideListWidget();
         return;
-
+    }
     regularExpresion.setPattern(word +".+");    //添加正则表达式
+    regularExpresion.setPatternOptions(QRegularExpression::CaseInsensitiveOption);  //设置不区分大小写
 
 
     QList<QString> vipCaseWords;   //完全匹配的关键字

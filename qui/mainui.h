@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QHBoxLayout>
+#include <setting.h>
 
 namespace Ui {
 class mainUI;
@@ -39,7 +40,10 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_pushButton_4_clicked();
+
 private:
+    Setting setting;    //软件配置
     Ui::mainUI *ui;
 };
 

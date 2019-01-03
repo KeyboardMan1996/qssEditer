@@ -391,6 +391,7 @@ background-color: rgb(255, 255, 255);
      <property name="styleSheet">
       <string notr="true">QTabWidget::pane { /* The tab widget frame */
       border-top: 2px solid #C2C7CB;
+	font: 12pt &quot;Agency FB&quot;;
   }
 
   QTabWidget::tab-bar {
@@ -412,9 +413,6 @@ background-color: rgb(255, 255, 255);
       min-width: 35ex;
       padding: 5px;
       margin-right:3px;
-	
-	font: 75 9pt &quot;微软雅黑&quot;;
-
   }
 
   QTabBar::tab:selected, QTabBar::tab:hover {

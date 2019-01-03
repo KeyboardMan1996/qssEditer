@@ -22,6 +22,7 @@ protected:
     void run();
 signals:
     void matchCaseWordFinished(QList<QString> vipCaseWords,QList<QString> lowCaseWords,int caseWordSize);
+    void hideListWidget();
 };
 
 #endif // MATCHWORDSTHREA_H

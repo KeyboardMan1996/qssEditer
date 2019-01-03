@@ -1,0 +1,16 @@
+Qwidget
+Qdialog
+QMainWindow
+QMessageBox
+QAbstractSlider
+Qslider
+QScrollBar
+QAbstractButton
+QCheckBox
+QPushButton
+QFrame
+QLabel
+QToolbox
+QLineEdit
+QComboBox
+QTabWidget

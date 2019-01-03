@@ -10,6 +10,7 @@ class myHightLighter:public QSyntaxHighlighter
 public:
     myHightLighter(QTextDocument *parent);
     QList<QString> caseWords;
+    QList<QString> qtClassNames;
 protected:
     void highlightBlock(const QString &text); //高亮规则设置
 private:
