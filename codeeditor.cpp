@@ -220,6 +220,7 @@ void  CodeEditor::inserChanged(int position, int charsRemoved, int charsAdded)
 * 如果没有匹配的关键字，则隐藏listwidget
 * @vipCaseWords 完全匹配的关键字
 * @lowCaseWords 模糊匹配的关键字
+* @caseWordSize 用户键入关键字的长度
 */
 void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCaseWords,int caseWordSize)
 {
@@ -237,15 +238,15 @@ void CodeEditor::matchFinished(QList<QString> vipCaseWords, QList<QString> lowCa
     QTextBlock block = firstVisibleBlock();
     QTextCursor cursor = this->textCursor();
     QTextBlock cursorBlock = cursor.block();
-    int l = 1;
+    int y = 3;
     while(block != cursorBlock)     //获取文本块在当前显示区域是第几行
     {
-        l++;
+        y = y + blockBoundingRect(block).height();          //加上文本块矩形的高度（获取的矩形是加上了行距的）
         block = block.next();
     }
-    int y = l * fontMetrics().height() +3;
+    y = y + blockBoundingRect(block).height();
   //  int x = 3 + cursor.positionInBlock() *fontMetrics().width('a');
-    int x = 3;
+    int x = 3 + lineNumberAreaWidth();                  //加上行号显示区域的宽度
     QString text = QString(cursorBlock.text()).left(cursor.positionInBlock());
     for(int i = 0; i < text.size();i++)         //获取光标前所有字符相加的宽度，用于关键字提示框的位置
     {

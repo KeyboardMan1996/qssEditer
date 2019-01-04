@@ -19,7 +19,7 @@ MatchWordsThread::MatchWordsThread()
 
     }
 
-    {       //载入css关键字
+    {       //qt类名
         QFile file("./config/qtClass.txt");
         if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
         {

@@ -52,18 +52,15 @@
 #include "myhightlighter.h"
 #include "codeeditor.h"
 #include "qui/mainui.h"
-/*
-*关键词补全思路
-* 使用qtextdocument的contentChange函数检测文本被改变
-* 使用findBlock寻找被修改的文本块
-* 使用qtextcursor插入文本
-*/
-
+#include "database.h"
+#include "qui/codeeditui.h"
 int main(int argv, char **args)
 {
     QApplication app(argv, args);
     mainUI ui;
     ui.show();
+    CodeEditUI cod;
+    cod.show();
     return app.exec();
 }
 

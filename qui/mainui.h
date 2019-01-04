@@ -1,10 +1,9 @@
-#ifndef MAINUI_H
+﻿#ifndef MAINUI_H
 #define MAINUI_H
 
 #include <QWidget>
 #include <QMouseEvent>
 #include <QHBoxLayout>
-#include <setting.h>
 
 namespace Ui {
 class mainUI;
@@ -21,8 +20,6 @@ public:
 private:
     bool mousePress;
     QPoint mousePoint;
-    QString makeColorString(const QColor &color, const QString type);
-    QWidget *currentWidget;
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -34,16 +31,7 @@ private slots:
 
     void on_miniButton_clicked();
 
-    void on_pushButton_2_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_comboBox_currentIndexChanged(int index);
-
-    void on_pushButton_4_clicked();
-
 private:
-    Setting setting;    //软件配置
     Ui::mainUI *ui;
 };
 
