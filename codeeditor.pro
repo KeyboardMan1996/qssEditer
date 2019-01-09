@@ -11,7 +11,8 @@ HEADERS     = codeeditor.h \
     setting.h \
     listwidgetui.h \
     database.h \
-    qui/codeeditui.h
+    qui/codeeditui.h \
+    docmentui.h
 SOURCES     = main.cpp \
               codeeditor.cpp \
     myhightlighter.cpp \
@@ -23,7 +24,8 @@ SOURCES     = main.cpp \
     setting.cpp \
     listwidgetui.cpp \
     database.cpp \
-    qui/codeeditui.cpp
+    qui/codeeditui.cpp \
+    docmentui.cpp
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/widgets/codeeditor
 INSTALLS += target
@@ -33,7 +35,8 @@ FORMS += \
     qui/mainui.ui \
     qui/setconstui.ui \
     listwidgetui.ui \
-    qui/codeeditui.ui
+    qui/codeeditui.ui \
+    docmentui.ui
 
 RESOURCES += \
     qui/qr.qrc

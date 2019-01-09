@@ -19,21 +19,10 @@ public:
     ~CodeEditUI();
     QHBoxLayout *contentLayout;
 private:
-    bool mousePress;
     QPoint mousePoint;
     QString makeColorString(const QColor &color, const QString type);
     QWidget *currentWidget;
-protected:
-    void mousePressEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
 private slots:
-    void on_closeButton_clicked();
-
-    void on_maxButton_clicked();
-
-    void on_miniButton_clicked();
-
     void on_pushButton_2_clicked();
 
     void on_pushButton_clicked();

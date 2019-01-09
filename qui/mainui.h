@@ -1,4 +1,4 @@
-﻿#ifndef MAINUI_H
+#ifndef MAINUI_H
 #define MAINUI_H
 
 #include <QWidget>

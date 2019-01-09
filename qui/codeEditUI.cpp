@@ -11,13 +11,8 @@ CodeEditUI::CodeEditUI(QWidget *parent) :
     ui(new Ui::CodeEditUI)
 {
     ui->setupUi(this);
-    this->setWindowFlags(this->windowFlags() | Qt::FramelessWindowHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    contentLayout = new QHBoxLayout;
-    contentLayout->setMargin(0);
-    ui->contentWidget->setLayout(contentLayout);
-
     currentWidget = new listWidgetUI;
+    currentWidget->setObjectName("miaomiaomiao");
     ui->widget->layout()->addWidget(currentWidget);
 
     ui->codeEditer->setFont(setting.getFont());
@@ -27,43 +22,6 @@ CodeEditUI::CodeEditUI(QWidget *parent) :
 CodeEditUI::~CodeEditUI()
 {
     delete ui;
-}
-
-void CodeEditUI::mouseMoveEvent(QMouseEvent *e)
-{
-    QWidget::mouseMoveEvent(e);
-    if(mousePress)
-        this->move(pos()+(e->pos()-mousePoint));
-}
-void CodeEditUI::mousePressEvent(QMouseEvent *e)
-{
-    QWidget::mousePressEvent(e);
-    if(e->pos().y()<=30)
-    {
-        mousePress = true;
-        mousePoint = e->pos();
-    }
-
-}
-void CodeEditUI::mouseReleaseEvent(QMouseEvent *e)
-{
-    QWidget::mouseReleaseEvent(e);
-    mousePress = false;
-}
-
-void CodeEditUI::on_closeButton_clicked()
-{
-    this->close();
-}
-
-void CodeEditUI::on_maxButton_clicked()
-{
-    this->showMaximized();
-}
-
-void CodeEditUI::on_miniButton_clicked()
-{
-    this->showMinimized();
 }
 
 void CodeEditUI::on_pushButton_2_clicked()

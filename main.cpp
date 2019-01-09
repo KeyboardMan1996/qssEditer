@@ -54,13 +54,16 @@
 #include "qui/mainui.h"
 #include "database.h"
 #include "qui/codeeditui.h"
+#include "qui/contentui.h"
+#include "docmentui.h"
 int main(int argv, char **args)
 {
     QApplication app(argv, args);
     mainUI ui;
+    ui.contentLayout->addWidget(new contentUI(&ui));
     ui.show();
-    CodeEditUI cod;
-    cod.show();
+    DocmentUI u;
+    u.show();
     return app.exec();
 }
 
