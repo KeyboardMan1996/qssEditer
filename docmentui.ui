@@ -177,17 +177,32 @@ QLineEdit{
           </property>
           <item>
            <property name="text">
-            <string>新建项目</string>
+            <string>类名</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>新建项目</string>
+            <string>图标名</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>新建项目</string>
+            <string>属性</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>伪状态</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>子控件名</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>类型值</string>
            </property>
           </item>
          </widget>
@@ -196,7 +211,7 @@ QLineEdit{
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="insertButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -225,7 +240,7 @@ QLineEdit{
 }</string>
        </property>
        <property name="text">
-        <string>关于 and 反馈</string>
+        <string>插入数据</string>
        </property>
       </widget>
      </item>

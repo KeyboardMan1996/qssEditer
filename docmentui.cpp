@@ -1,6 +1,9 @@
 #include "docmentui.h"
 #include "ui_docmentui.h"
 #include "qstandarditemmodel.h"
+#include "insertui.h"
+#include "qui/mainui.h"
+#include <qmessagebox.h>
 
 DocmentUI::DocmentUI(QWidget *parent) :
     QWidget(parent),
@@ -18,18 +21,8 @@ DocmentUI::DocmentUI(QWidget *parent) :
 //      ui->tableView->setModel(model);
 //      SetTabViewColumnSpace(ui->tableView);
 
-      database = new Database;
-      Values values = database->selectFormValues("ClassName",4);
-      QStandardItemModel *model = new QStandardItemModel();
-      for(int row =0;row < values.size();row++)
-      {
-          for(int column = 1; column < 4; ++column) {
-               QStandardItem *item = new QStandardItem(values.at(column));
-               model->setItem(row, column, item);
-               }
-      }
-      ui->tableView->setModel(model);
-      SetTabViewColumnSpace(ui->tableView);
+      this->database = new Database;
+
 
 
 }
@@ -37,6 +30,57 @@ DocmentUI::DocmentUI(QWidget *parent) :
 DocmentUI::~DocmentUI()
 {
     delete ui;
+}
+/*
+ * 显示表数据
+ * @form 表明
+ */
+void DocmentUI::displayForm(const Type &form)
+{
+    Values values;
+    int columu;
+    switch (form) {
+    case CLASS_NAME:
+         columu = 4;
+         values = database->selectFormValues("ClassName",columu);
+        break;
+    case ICO:
+        columu = 4;
+        values = database->selectFormValues("Ico",columu);
+        break;
+    case PROPERTIES:
+        columu = 5;
+        values = database->selectFormValues("Properties",columu);
+        break;
+    case PSEUDO_STATES:
+        columu = 4;
+        values = database->selectFormValues("PseudoStates",columu);
+        break;
+    case SUB_CONTROLS:
+        columu = 4;
+        values = database->selectFormValues("SubControls",columu);
+        break;
+    case TYPE:
+        columu = 6;
+        values = database->selectFormValues("Type",columu);
+        break;
+    default:
+        QMessageBox mes;
+        mes.setText("获取表数据错误：输入了未知类型");
+        mes.exec();
+        return;
+        break;
+    }
+    QStandardItemModel *model = new QStandardItemModel();
+    for(int row =0;row < values.size()/columu;row++)
+    {
+        for(int c = 1; c < columu; c++) {
+             QStandardItem *item = new QStandardItem(values.at(row*columu + c));
+             model->setItem(row, c, item);
+             }
+    }
+    ui->tableView->setModel(model);
+    SetTabViewColumnSpace(ui->tableView);
 }
 /*
  * 更新tableView自适应宽度和高度
@@ -54,4 +98,19 @@ void DocmentUI::SetTabViewColumnSpace(QTableView *tableView)
         tableView->setColumnWidth(i, tableView->columnWidth(i) + 40);  //多一些空余控件，不然每列内容很挤
     }
     tableView->horizontalHeader()->setStretchLastSection(true);        //最后一列补全所有空白位置
+}
+
+
+void DocmentUI::on_insertButton_clicked()
+{
+    InsertUI *insert = new InsertUI(database,Type(ui->comboBox->currentIndex()));
+    mainUI *mainui = new mainUI;
+    mainui->contentLayout->addWidget(insert);
+    mainui->resize(300,500);
+    mainui->show();
+}
+
+void DocmentUI::on_comboBox_currentIndexChanged(int index)
+{
+    displayForm(Type(index));
 }
