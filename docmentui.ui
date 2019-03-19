@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>831</width>
-    <height>860</height>
+    <width>852</width>
+    <height>617</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,6 +22,74 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="insertButton_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">.QPushButton{
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:5px;
+	padding:5px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+.QPushButton:hover{
+	
+	border-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <property name="text">
+        <string>删除数据</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="insertButton_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">.QPushButton{
+	background-color: rgb(85, 170, 255);
+	border-color: rgb(85, 170, 255);
+	border-width:2px;
+	border-style:solid;
+	border-radius:5px;
+	padding:5px;
+	font: 75 9pt &quot;微软雅黑&quot;;
+}
+.QPushButton:hover{
+	
+	border-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <property name="text">
+        <string>修改数据</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -77,6 +145,8 @@
 	padding:10px;
 	border: solid rgb(85, 170, 255);
 	border-right-width:2px;
+	background-color: rgb(255, 255, 255);
+	margin:2px;
 }</string>
           </property>
           <property name="text">
@@ -97,21 +167,22 @@
 	border: 0px solid rgb(85, 170, 255);
 	background-color: rgba(255, 255, 255, 0);
     padding: 1px 18px 1px 15px;
+	margin:2px;
     min-width: 60px;
     min-height:30px;
 }
 
 QComboBox:editable {
-    background: rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255,0);
 }
 
 QComboBox:!editable, QComboBox::drop-down:editable {
-      background-color: rgb(255, 255, 255,0);
+      background-color: rgb(255, 255, 255);
 }
 
 /* QComboBox gets the &quot;on&quot; state when the popup is open */
 QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-      background-color: rgb(238, 238, 238,0);
+      background-color: rgb(238, 238, 238);
 }
 
 QComboBox:on { /* shift the text when the popup opens */
@@ -128,18 +199,17 @@ QComboBox::drop-down {
     border-left-style: solid; /* just a single line */
     border-top-right-radius: 3px; /* same radius as the QComboBox */
     border-bottom-right-radius: 3px;
-    background: rgba(255, 255, 255, 0);
 }
 
 QComboBox::down-arrow {
-    image: url(:/image/ico_01.png);
-    background: rgba(255, 255, 255, 0);
+    image: url(:/images/ico_01.png);
+    background: rgb(255, 255, 255);
 }
 
 QComboBox::down-arrow:on { /* shift the arrow when popup is open */
     top: 1px;
     left: 1px;
-    background: rgba(255, 255, 255, 0);
+    background: rgb(255, 255, 255);
 }
 QComboBox QAbstractItemView::item {
      color: rgb(8, 8, 8);
@@ -149,7 +219,7 @@ QComboBox QAbstractItemView::item {
 }
 QComboBox QAbstractItemView::item::hover{
      min-height: 30px;
-	background-color: rgb(255, 255, 255,0);
+	background-color: rgb(255, 255, 255);
 }
 QComboBox QAbstractItemView{
      border: 2px solid;
@@ -157,7 +227,8 @@ QComboBox QAbstractItemView{
      border-bottom-left-radius: 3px; 
 	 border-color: rgb(85, 170, 255);
      min-height: 20px;
-     background: rgba(255, 255, 255, 0);
+     
+	background-color: rgb(255, 255, 255);
 }
 
 QLabel {

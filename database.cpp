@@ -138,6 +138,19 @@ void Database::upDatabase(const QString &from, const int &id, const QString &typ
     erroMessageBox(query,"更新");
 }
 /*
+ * 通过id来删除某一行
+ * @id ID
+ */
+void Database::deleteRowForID(int id,QString form)
+{
+    QString sql("delete from %1 where ID=?");
+    sql = sql.arg(form);
+    QSqlQuery query(database);
+    query.prepare(sql);
+    query.bindValue(0,id);
+    erroMessageBox(query,"删除");
+}
+/*
 *获取
 * @from 表名
 * @type 要获取的列名

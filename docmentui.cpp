@@ -4,6 +4,7 @@
 #include "insertui.h"
 #include "qui/mainui.h"
 #include <qmessagebox.h>
+#include "updataui.h"
 
 DocmentUI::DocmentUI(QWidget *parent) :
     QWidget(parent),
@@ -39,6 +40,11 @@ void DocmentUI::displayForm(const Type &form)
 {
     Values values;
     int columu;
+    QList<QString> heads;
+    heads.append("ID");
+    heads.append("关键字");
+    heads.append("中文文档");
+    heads.append("官方文档");
     switch (form) {
     case CLASS_NAME:
          columu = 4;
@@ -51,6 +57,7 @@ void DocmentUI::displayForm(const Type &form)
     case PROPERTIES:
         columu = 5;
         values = database->selectFormValues("Properties",columu);
+        heads.append("例子");
         break;
     case PSEUDO_STATES:
         columu = 4;
@@ -63,6 +70,8 @@ void DocmentUI::displayForm(const Type &form)
     case TYPE:
         columu = 6;
         values = database->selectFormValues("Type",columu);
+        heads.insert(2,"类型");
+        heads.append("例子");
         break;
     default:
         QMessageBox mes;
@@ -72,12 +81,18 @@ void DocmentUI::displayForm(const Type &form)
         break;
     }
     QStandardItemModel *model = new QStandardItemModel();
+    //将每一个数据放到表格中
     for(int row =0;row < values.size()/columu;row++)
     {
-        for(int c = 1; c < columu; c++) {
+        for(int c = 0; c < columu; c++) {
              QStandardItem *item = new QStandardItem(values.at(row*columu + c));
              model->setItem(row, c, item);
              }
+    }
+    //设置表头
+    for(int i = 0;i < heads.size();i++)
+    {
+        model->setHeaderData(i,Qt::Horizontal,heads.at(i));
     }
     ui->tableView->setModel(model);
     SetTabViewColumnSpace(ui->tableView);
@@ -89,18 +104,36 @@ void DocmentUI::SetTabViewColumnSpace(QTableView *tableView)
 {
     //根据内容来确定列宽度
     tableView->resizeColumnsToContents();       //自适应列宽度
-    tableView->resizeRowsToContents();          //自适应行高度
     tableView->horizontalHeader();
-
+    int miniRow = 0;    //小列的总宽度
+    int maxRowCount = 0;    //比较宽的行的总数
     //获取表头列数
     for(int i = 0; i < tableView->horizontalHeader()->count(); i++)
     {
-        tableView->setColumnWidth(i, tableView->columnWidth(i) + 40);  //多一些空余控件，不然每列内容很挤
+        if(tableView->columnWidth(i) < 40)
+        {
+            tableView->setColumnWidth(i, tableView->columnWidth(i)+40);  //多一些空余控件，不然每列内容很挤
+        }
+        if(tableView->columnWidth(i) < 200)
+        {
+            miniRow += tableView->columnWidth(i) + 1;
+        }else {
+            maxRowCount++;
+        }
     }
-    tableView->horizontalHeader()->setStretchLastSection(true);        //最后一列补全所有空白位置
+    for(int i = 0;i < tableView->horizontalHeader()->count();i++)
+    {
+        if(tableView->columnWidth(i) > 200)
+        {
+            tableView->setColumnWidth(i, (tableView->width() - miniRow)/maxRowCount - 1);
+        }
+    }
+    tableView->resizeRowsToContents();          //自适应行高度
+  //  tableView->horizontalHeader()->setStretchLastSection(true);        //最后一列补全所有空白位置
 }
-
-
+/*
+ * 插入数据按钮
+ */
 void DocmentUI::on_insertButton_clicked()
 {
     InsertUI *insert = new InsertUI(database,Type(ui->comboBox->currentIndex()));
@@ -108,9 +141,124 @@ void DocmentUI::on_insertButton_clicked()
     mainui->contentLayout->addWidget(insert);
     mainui->resize(300,500);
     mainui->show();
+    //绑定窗口关闭信号刷新表格显示
+    connect(insert,SIGNAL(meCloss()),this,SLOT(upDataDisplayForm()));
 }
-
+/*
+ * 类型下拉选项框
+ */
 void DocmentUI::on_comboBox_currentIndexChanged(int index)
 {
     displayForm(Type(index));
+}
+/*
+ * 删除数据按钮
+ */
+void DocmentUI::on_insertButton_2_clicked()
+{
+    //获取选中行的引索
+    int row =ui->tableView->currentIndex().row();
+    if(row == -1)
+        return;
+    QAbstractItemModel *modl = ui->tableView->model();
+    QModelIndex index = modl->index(row,0);
+    int id = index.data().toInt();
+    //获取表名
+    QString form;
+
+    switch (ui->comboBox->currentIndex()) {
+    case 0:
+        form = "ClassName";
+        break;
+    case 1:
+        form = "Ico";
+        break;
+    case 2:
+        form = "Properties";
+        break;
+    case 3:
+        form = "PseudoStates";
+        break;
+    case 4:
+        form = "SubControls";
+        break;
+    case 5:
+        form ="Type";
+    }
+    //删除行
+    database->deleteRowForID(id,form);
+    //刷新表格显示
+    upDataDisplayForm();
+}
+/*
+ * 修改数据
+ */
+void DocmentUI::on_insertButton_3_clicked()
+{
+    //获取选中行的引索
+    int row =ui->tableView->currentIndex().row();
+    if(row == -1)
+        return;
+    QAbstractItemModel *modl = ui->tableView->model();
+    QModelIndex index = modl->index(row,0);
+    int id = index.data().toInt();
+
+    UpDataUi *upDataUi = new UpDataUi(database,Type(ui->comboBox->currentIndex()));
+    upDataUi->id = id;
+    //获取表名并初始化值
+    QString form;
+    switch (ui->comboBox->currentIndex()) {
+    case 0:
+        form = "ClassName";
+        upDataUi->setCaseWord(modl->index(row,1).data().toString());
+        upDataUi->setContentE(modl->index(row,2).data().toString());
+        upDataUi->setContentC(modl->index(row,3).data().toString());
+        break;
+    case 1:
+        form = "Ico";
+        upDataUi->setCaseWord(modl->index(row,1).data().toString());
+        upDataUi->setContentE(modl->index(row,2).data().toString());
+        upDataUi->setContentC(modl->index(row,3).data().toString());
+        break;
+    case 2:
+        form = "Properties";
+        upDataUi->setCaseWord(modl->index(row,1).data().toString());
+        upDataUi->setContentE(modl->index(row,2).data().toString());
+        upDataUi->setContentC(modl->index(row,3).data().toString());
+        upDataUi->setExample(modl->index(row,4).data().toString());
+        break;
+    case 3:
+        form = "PseudoStates";
+        upDataUi->setCaseWord(modl->index(row,1).data().toString());
+        upDataUi->setContentE(modl->index(row,2).data().toString());
+        upDataUi->setContentC(modl->index(row,3).data().toString());
+        break;
+    case 4:
+        form = "SubControls";
+        upDataUi->setCaseWord(modl->index(row,1).data().toString());
+        upDataUi->setContentE(modl->index(row,2).data().toString());
+        upDataUi->setContentC(modl->index(row,3).data().toString());
+        break;
+    case 5:
+        form ="Type";
+        upDataUi->setCaseWord(modl->index(row,1).data().toString());
+        upDataUi->setTYPE(modl->index(row,2).data().toString());
+        upDataUi->setContentE(modl->index(row,3).data().toString());
+        upDataUi->setContentC(modl->index(row,4).data().toString());
+        upDataUi->setExample(modl->index(row,5).data().toString());
+    }
+
+    mainUI *mainui = new mainUI;
+    mainui->contentLayout->addWidget(upDataUi);
+    mainui->resize(300,600);
+    mainui->show();
+    //绑定窗口关闭信号刷新表格显示
+    connect(upDataUi,SIGNAL(meCloss()),this,SLOT(upDataDisplayForm()));
+}
+/*
+ * 刷新显示内容
+ */
+void DocmentUI::upDataDisplayForm()
+{
+    displayForm(Type(ui->comboBox->currentIndex()));
 }

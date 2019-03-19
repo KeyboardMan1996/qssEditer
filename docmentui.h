@@ -19,9 +19,15 @@ public:
     ~DocmentUI();
 
 private slots:
+    void upDataDisplayForm();
+
     void on_insertButton_clicked();
 
     void on_comboBox_currentIndexChanged(int index);
+
+    void on_insertButton_2_clicked();
+
+    void on_insertButton_3_clicked();
 
 private:
     Ui::DocmentUI *ui;

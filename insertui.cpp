@@ -91,6 +91,7 @@ bool InsertUI::insertClassName()
     QString caseWord = ui->caseWordLineEdit->text();
     QString contentE = ui->contentEPlainTextEdit->toPlainText();
     QString contentC = ui->contentCPlainTextEdit->toPlainText();
+
     if(database!=nullptr && caseWord != "")
     {
         database->insertClassName(caseWord,contentE,contentC);
@@ -106,6 +107,11 @@ bool InsertUI::inserIco()
     QString caseWord = ui->caseWordLineEdit->text();
     QString contentE = ui->contentEPlainTextEdit->toPlainText();
     QString contentC = ui->contentCPlainTextEdit->toPlainText();
+
+    caseWord = contentE.left(contentE.indexOf(" "));
+    contentE = contentE.remove(0,caseWord.length() + 2);
+
+    caseWord = caseWord.remove(0,1);
     if(database!=nullptr && caseWord != "")
     {
         database->insertIco(caseWord,contentE,contentC);
@@ -213,5 +219,7 @@ void InsertUI::on_pushButton_6_clicked()
         return;
     }
     QWidget *p = dynamic_cast<QWidget *>(this->parent()->parent());     //之所以两层parent是因为这个窗口要放在主ui中，而主ui包了两层widget
-    p->close();
+    //p->close();
+    emit meCloss();
 }
+

@@ -2,6 +2,7 @@
 #include "ui_contentui.h"
 #include <QWidget>
 #include "codeEditUI.h"
+#include "./docmentui.h"
 
 contentUI::contentUI(QWidget *parent) :
     QWidget(parent),
@@ -11,6 +12,7 @@ contentUI::contentUI(QWidget *parent) :
     ui->tabWidget->tabBar()->hide();
     ui->tabWidget->addTab(new QWidget,"");
     ui->tabWidget->addTab(new CodeEditUI,"");
+    ui->tabWidget->addTab(new DocmentUI,"");
 }
 
 contentUI::~contentUI()
@@ -26,4 +28,9 @@ void contentUI::on_pushButton_clicked()
 void contentUI::on_pushButton_2_clicked()
 {
     ui->tabWidget->setCurrentIndex(1);
+}
+
+void contentUI::on_pushButton_3_clicked()
+{
+    ui->tabWidget->setCurrentIndex(2);
 }

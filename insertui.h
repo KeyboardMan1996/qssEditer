@@ -28,11 +28,10 @@ public:
     void setDatabase(Database *database);
     void setType(const Type &type);
     void hideUI(const Type &type);
-
 private slots:
-    void on_pushButton_6_clicked();
+    virtual void on_pushButton_6_clicked();
 
-private:
+protected:
     Ui::InsertUI *ui;
     Database *database;
     Type type;
@@ -42,6 +41,8 @@ private:
     bool insertPseudoSates();
     bool insertSubControls();
     bool insertType();
+signals:
+    void meCloss();
 };
 
 #endif // INSERTUI_H

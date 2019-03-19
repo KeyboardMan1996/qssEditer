@@ -62,8 +62,7 @@ int main(int argv, char **args)
     mainUI ui;
     ui.contentLayout->addWidget(new contentUI(&ui));
     ui.show();
-    DocmentUI u;
-    u.show();
+
     return app.exec();
 }
 
