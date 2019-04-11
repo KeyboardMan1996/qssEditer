@@ -19,6 +19,8 @@ public:
     ~DocmentUI();
 
 private slots:
+    void SetTabViewColumnSpace(QTableView *tableView);
+    
     void upDataDisplayForm();
 
     void on_insertButton_clicked();
@@ -32,10 +34,8 @@ private slots:
 private:
     Ui::DocmentUI *ui;
     Database *database;
-    void SetTabViewColumnSpace(QTableView *tableView);
     void displayForm(const Type &form);
-protected:
-    void resize();
+
 };
 
 #endif // DOCMENTUI_H

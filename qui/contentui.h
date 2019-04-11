@@ -3,7 +3,8 @@
 
 #include <QWidget>
 #include <QTabWidget>
-
+#include <qui/codeEditUI.h>
+#include <listwidgetui.h>
 namespace Ui {
 class contentUI;
 }
@@ -16,6 +17,8 @@ public:
     explicit contentUI(QWidget *parent = 0);
     ~contentUI();
     QTabWidget *tabWidget;
+    CodeEditUI *codeEdit;
+    listWidgetUI *TestUI;
 
 private slots:
     void on_pushButton_clicked();
@@ -24,7 +27,10 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
+
     Ui::contentUI *ui;
 };
 

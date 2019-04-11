@@ -11,10 +11,6 @@ CodeEditUI::CodeEditUI(QWidget *parent) :
     ui(new Ui::CodeEditUI)
 {
     ui->setupUi(this);
-    currentWidget = new listWidgetUI;
-    currentWidget->setObjectName("miaomiaomiao");
-    ui->widget->layout()->addWidget(currentWidget);
-
     ui->codeEditer->setFont(setting.getFont());
 
 }
@@ -54,7 +50,11 @@ void CodeEditUI::on_pushButton_clicked()
 
 
 }
-
+/*
+ * 将颜色转换为字符串
+ * @color 颜色
+ * @type 颜色类型
+ */
 QString CodeEditUI::makeColorString(const QColor &color, const QString type)
 {
     if(type == "RGBA")
@@ -77,7 +77,13 @@ QString CodeEditUI::makeColorString(const QColor &color, const QString type)
                                color.blue()).arg(color.alpha() != 255 ? QString().sprintf("%02X", color.alpha()) : QString()); }
     return "erro";
 }
-
+/*
+ * 获取qss文本
+ */
+QString CodeEditUI::getStyle()
+{
+    return ui->codeEditer->toPlainText();
+}
 
 void CodeEditUI::on_pushButton_4_clicked()
 {
@@ -90,13 +96,19 @@ void CodeEditUI::on_pushButton_4_clicked()
     ui->codeEditer->setTextCursor(cursor);
 }
 
-void CodeEditUI::on_pushButton_3_clicked()
-{
-    currentWidget->setStyleSheet(ui->codeEditer->toPlainText());
-}
 
-void CodeEditUI::on_pushButton_6_clicked()
-{
-    QDesktopServices::openUrl(QUrl(QLatin1String("http://anjztb.top/anqss")));
-}
 
+void CodeEditUI::on_pushButton_5_clicked()
+{
+    QFontDialog fontDialog(setting.getFont());
+    bool ok;
+    QFont font = fontDialog.getFont(&ok,this);  //获取字体
+    if(ok)  //如果用户点击确定按钮
+    {
+        QTextCursor cursor = ui->codeEditer->textCursor();
+        QString ft = "font:";
+        ft = ft + QString::number(font.pointSize())+ "pt \"" + font.family() + "\";";
+        cursor.insertText(ft);
+    }
+
+}

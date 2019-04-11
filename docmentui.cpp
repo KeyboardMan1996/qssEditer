@@ -11,19 +11,9 @@ DocmentUI::DocmentUI(QWidget *parent) :
     ui(new Ui::DocmentUI)
 {
     ui->setupUi(this);
-//    QStandardItemModel *model = new QStandardItemModel(20, 10);
-//      for (int row = 0; row < 20; ++row) {
-//          for (int column = 0; column < 10; ++column) {
-//              QStandardItem *item = new QStandardItem(QString("row %0,\n column %1").arg(row).arg(column));
-//              model->setItem(row, column, item);
-//          }
-//      }
 
-//      ui->tableView->setModel(model);
-//      SetTabViewColumnSpace(ui->tableView);
-
-      this->database = new Database;
-
+    this->database = new Database;
+    this->on_comboBox_currentIndexChanged(0);
 
 
 }
@@ -34,7 +24,7 @@ DocmentUI::~DocmentUI()
 }
 /*
  * 显示表数据
- * @form 表明
+ * @form 表名
  */
 void DocmentUI::displayForm(const Type &form)
 {
@@ -43,8 +33,8 @@ void DocmentUI::displayForm(const Type &form)
     QList<QString> heads;
     heads.append("ID");
     heads.append("关键字");
-    heads.append("中文文档");
     heads.append("官方文档");
+    heads.append("中文文档");
     switch (form) {
     case CLASS_NAME:
          columu = 4;
@@ -108,15 +98,22 @@ void DocmentUI::SetTabViewColumnSpace(QTableView *tableView)
     int miniRow = 0;    //小列的总宽度
     int maxRowCount = 0;    //比较宽的行的总数
     //获取表头列数
+    /*
+    自动适应原理
+    先获得较短列的总长度。
+    然后用总长度减去较短列的长度。
+    之后将剩余长度平均分配给较长列。
+    然后自动补齐最后列
+    */
     for(int i = 0; i < tableView->horizontalHeader()->count(); i++)
     {
         if(tableView->columnWidth(i) < 40)
         {
-            tableView->setColumnWidth(i, tableView->columnWidth(i)+40);  //多一些空余控件，不然每列内容很挤
+            tableView->setColumnWidth(i, tableView->columnWidth(i)+40);  //多一些空余空间，不然每列内容很挤
         }
         if(tableView->columnWidth(i) < 200)
         {
-            miniRow += tableView->columnWidth(i) + 1;
+            miniRow += tableView->columnWidth(i) + 10;       //取消横向滚动条
         }else {
             maxRowCount++;
         }
@@ -129,7 +126,8 @@ void DocmentUI::SetTabViewColumnSpace(QTableView *tableView)
         }
     }
     tableView->resizeRowsToContents();          //自适应行高度
-  //  tableView->horizontalHeader()->setStretchLastSection(true);        //最后一列补全所有空白位置
+     tableView->horizontalHeader()->setStretchLastSection(true); //自动补齐最后一列
+
 }
 /*
  * 插入数据按钮

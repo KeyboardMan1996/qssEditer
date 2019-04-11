@@ -76,7 +76,8 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
     listWidget->hide();
 
     myHightLighter *highLighter = new myHightLighter(this->document());         //设置高亮器
-
+    int i =0;
+    i++;
 }
 
 CodeEditor::~CodeEditor()

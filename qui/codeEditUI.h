@@ -18,10 +18,10 @@ public:
     explicit CodeEditUI(QWidget *parent = 0);
     ~CodeEditUI();
     QHBoxLayout *contentLayout;
+    QString getStyle();
 private:
     QPoint mousePoint;
     QString makeColorString(const QColor &color, const QString type);
-    QWidget *currentWidget;
 private slots:
     void on_pushButton_2_clicked();
 
@@ -29,9 +29,7 @@ private slots:
 
     void on_pushButton_4_clicked();
 
-    void on_pushButton_3_clicked();
-
-    void on_pushButton_6_clicked();
+    void on_pushButton_5_clicked();
 
 private:
     Setting setting;    //软件配置

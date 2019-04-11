@@ -19,6 +19,7 @@ public:
     void insertType(const QString &name,const QString &type = "",const QString &content_e = "",const QString &content_c ="",const QString &example = "");
     void upDatabase(const QString &from,const int &id,const QString &type,const QString &value);
     void deleteRowForID(int id,QString form);
+    void deleteSpeas();
     Values selectOneValues(const QString &from,const QString &type);
     Values getClassNames();
     Values getIcos();

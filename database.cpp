@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <qvariant.h>
 #include <QDebug>
+#include <qfile.h>
 
 Database::Database()
 {
@@ -15,8 +16,6 @@ Database::Database()
         msgbox.setText("数据库打开失败");
         msgbox.exec();
     }
-
-
 }
 /*
 *插入类名
@@ -28,7 +27,7 @@ void Database::insertClassName(const QString &name, const QString &content_e, co
 {
     QSqlQuery query(database);
     query.prepare("insert into ClassName(name,content_e,content_c) values(?,?,?)");
-    query.bindValue(0,name);
+    query.bindValue(0,name.trimmed());
     query.bindValue(1,content_e);
     query.bindValue(2,content_c);
 
@@ -44,7 +43,7 @@ void Database::insertIco(const QString &name, const QString &content_e, const QS
 {
     QSqlQuery query(database);
     query.prepare("insert into Ico(name,content_e,content_c) values(?,?,?)");
-    query.bindValue(0,name);
+    query.bindValue(0,name.trimmed());
     query.bindValue(1,content_e);
     query.bindValue(2,content_c);
 
@@ -61,7 +60,7 @@ void Database::insertProperties(const QString &name, const QString &content_e, c
 {
     QSqlQuery query(database);
     query.prepare("insert into Properties(name,content_e,content_c,example) values(?,?,?,?)");
-    query.bindValue(0,name);
+    query.bindValue(0,name.trimmed());
     query.bindValue(1,content_e);
     query.bindValue(2,content_c);
     query.bindValue(3,example);
@@ -78,7 +77,7 @@ void Database::insertPseudoStates(const QString &name, const QString &content_e,
 {
     QSqlQuery query(database);
     query.prepare("insert into PseudoStates(name,content_e,content_c) values(?,?,?)");
-    query.bindValue(0,name);
+    query.bindValue(0,name.trimmed());
     query.bindValue(1,content_e);
     query.bindValue(2,content_c);
 
@@ -94,7 +93,7 @@ void Database::insertSubControls(const QString &name, const QString &content_e, 
 {
     QSqlQuery query(database);
     query.prepare("insert into SubControls(name,content_e,content_c) values(?,?,?)");
-    query.bindValue(0,name);
+    query.bindValue(0,name.trimmed());
     query.bindValue(1,content_e);
     query.bindValue(2,content_c);
 
@@ -167,7 +166,6 @@ Values Database::selectOneValues(const QString &from, const QString &type)
         Values values;
         while (query.next()) {
             values.append(query.value(0).toString());
-            qDebug() <<query.value(0);
         }
         return values;
     }
@@ -258,4 +256,53 @@ Values Database::selectFormValues(const QString &form, const int &valueLength)
     }
 
     return values;
+}
+/*
+ * 删除关键字中的多余空格
+ */
+void Database::deleteSpeas()
+{
+    {
+        Values  va = this->selectFormValues("Type",2);
+        for(int i = 0;i < va.size();i = i + 2)
+        {
+            upDatabase("type",va[i].toInt(),"name",va[i+1].trimmed());
+        }
+    }
+    {
+        Values  va = this->selectFormValues("ClassName",2);
+        for(int i = 0;i < va.size();i = i + 2)
+        {
+            upDatabase("ClassName",va[i].toInt(),"name",va[i+1].trimmed());
+        }
+    }
+    {
+        Values  va = this->selectFormValues("Ico",2);
+        for(int i = 0;i < va.size();i = i + 2)
+        {
+            upDatabase("Ico",va[i].toInt(),"name",va[i+1].trimmed());
+        }
+    }
+    {
+        Values  va = this->selectFormValues("Properties",2);
+        for(int i = 0;i < va.size();i = i + 2)
+        {
+            upDatabase("Properties",va[i].toInt(),"name",va[i+1].trimmed());
+        }
+    }
+    {
+        Values  va = this->selectFormValues("PseudoStates",2);
+        for(int i = 0;i < va.size();i = i + 2)
+        {
+            upDatabase("PseudoStates",va[i].toInt(),"name",va[i+1].trimmed());
+        }
+    }
+
+    {
+        Values  va = this->selectFormValues("SubControls",2);
+        for(int i = 0;i < va.size();i = i + 2)
+        {
+            upDatabase("SubControls",va[i].toInt(),"name",va[i+1].trimmed());
+        }
+    }
 }

@@ -4,13 +4,19 @@
 #include <qstring.h>
 #include <qobject.h>
 #include <qlist.h>
+#include "database.h"
 
 class myHightLighter:public QSyntaxHighlighter
 {
 public:
     myHightLighter(QTextDocument *parent);
-    QList<QString> caseWords;
-    QList<QString> qtClassNames;
+    Values icoNames;        //图标名称
+    Values ClassNames;      //类名
+    Values typeNames;       //类型名称
+    Values subControlNames; //子控件名称
+    Values pseudoStateNames;    //伪状态名称
+    Values propertieNames;  //属性名称
+
 protected:
     void highlightBlock(const QString &text); //高亮规则设置
 private:

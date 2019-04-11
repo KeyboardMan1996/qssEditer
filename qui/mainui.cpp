@@ -11,6 +11,7 @@ mainUI::mainUI(QWidget *parent) :
     contentLayout = new QHBoxLayout;
     contentLayout->setMargin(0);
     ui->contentWidget->setLayout(contentLayout);
+    mousePress = false;
 }
 
 mainUI::~mainUI()

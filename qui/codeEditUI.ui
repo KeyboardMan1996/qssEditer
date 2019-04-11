@@ -63,40 +63,6 @@ border-color: rgb(85, 170, 255);
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">.QPushButton{
-	background-color: rgb(85, 170, 255);
-	border-color: rgb(85, 170, 255);
-	border-width:2px;
-	border-style:solid;
-	border-radius:5px;
-	padding:5px;
-	font: 75 9pt &quot;微软雅黑&quot;;
-}
-.QPushButton:hover{
-	
-	border-color: rgb(255, 255, 255);
-}</string>
-        </property>
-        <property name="text">
-         <string>预览</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="pushButton_5">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -232,78 +198,11 @@ border-color: rgb(85, 170, 255);
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_6">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">.QPushButton{
-	background-color: rgb(85, 170, 255);
-	border-color: rgb(85, 170, 255);
-	border-width:2px;
-	border-style:solid;
-	border-radius:5px;
-	padding:5px;
-	font: 75 9pt &quot;微软雅黑&quot;;
-}
-.QPushButton:hover{
-	
-	border-color: rgb(255, 255, 255);
-}</string>
-        </property>
-        <property name="text">
-         <string>关于 and 反馈</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,3">
-     <item>
-      <widget class="QWidget" name="widget" native="true">
-       <property name="styleSheet">
-        <string notr="true">#widget{
-background-color: rgb(255, 255, 255);
-	
-	border-color: rgb(85, 170, 255);
-	border-width:2px;
-	border-style:solid;
-}</string>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4"/>
-        </item>
-       </layout>
-      </widget>
-     </item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="3">
      <item>
       <widget class="CodeEditor" name="codeEditer">
        <property name="styleSheet">
@@ -330,8 +229,6 @@ background-color: rgb(255, 255, 255);
    <header>codeeditor.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="qr.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

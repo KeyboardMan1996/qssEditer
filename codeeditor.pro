@@ -1,6 +1,7 @@
 QT += widgets
 QT += sql
 QT += core gui
+QT += network
 HEADERS     = codeeditor.h \
     myhightlighter.h \
     matchwordsthrea.h \
@@ -14,7 +15,9 @@ HEADERS     = codeeditor.h \
     qui/codeeditui.h \
     docmentui.h \
     insertui.h \
-    updataui.h
+    updataui.h \
+    versionsmanager.h \
+    primaryfaceui.h
 SOURCES     = main.cpp \
               codeeditor.cpp \
     myhightlighter.cpp \
@@ -29,7 +32,9 @@ SOURCES     = main.cpp \
     qui/codeeditui.cpp \
     docmentui.cpp \
     insertui.cpp \
-    updataui.cpp
+    updataui.cpp \
+    versionsmanager.cpp \
+    primaryfaceui.cpp
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/widgets/codeeditor
 INSTALLS += target
@@ -41,7 +46,8 @@ FORMS += \
     listwidgetui.ui \
     qui/codeeditui.ui \
     docmentui.ui \
-    insertui.ui
+    insertui.ui \
+    primaryfaceui.ui
 
 RESOURCES += \
     qui/qr.qrc

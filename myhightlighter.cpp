@@ -5,31 +5,13 @@
 myHightLighter::myHightLighter(QTextDocument *parent)
     :QSyntaxHighlighter(parent)
 {
-    {       //载入css关键字
-        QFile file("./config/caseWord.txt");
-        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
-        {
-            QTextStream stream(&file);
-            while (!stream.atEnd()) {
-                QString line = stream.readLine();
-                caseWords.append(line);
-             }
-        }
-    }
-
-    {      //载入qt类名
-        QFile file("./config/qtClass.txt");
-        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
-        {
-            QTextStream stream(&file);
-            while (!stream.atEnd()) {
-                QString line = stream.readLine();
-                qtClassNames.append(line);
-             }
-        }
-
-    }
-
+    Database data;
+    ClassNames = data.getClassNames();
+    typeNames = data.getType();
+    subControlNames = data.getSubControls();
+    propertieNames = data.getProperties();
+    pseudoStateNames = data.getPseudoStates();
+    icoNames = data.getIcos();
 }
 
 void myHightLighter::highlightBlock(const QString &text)
@@ -48,17 +30,45 @@ void myHightLighter::highlightBlock(const QString &text)
 
     }
 
-    for(int i = 0;i < qtClassNames.size();i++) //高亮qt类名
+    for(int i = 0;i < ClassNames.size();i++) //高亮qt类名
     {
-        highlightCaseWord(qtClassNames.at(i),text);
+        highlightCaseWord(ClassNames.at(i),text);
     }
-    for(int i = 0;i < caseWords.size();i++)
+    for(int i = 0;i < propertieNames.size();i++) //高亮属性
     {
         QTextCharFormat f;
         f.setFontWeight(QFont::Bold);
-        f.setForeground(Qt::darkRed);
-        highlightCaseWord(caseWords.at(i),f,text);
+        f.setForeground(QColor("#EE2C2C"));
+        highlightCaseWord(propertieNames.at(i),f,text);
     }
+/*    for(int i = 0;i < icoNames.size();i++)  //高亮图标名
+    {
+        QTextCharFormat f;
+        f.setFontWeight(QFont::Bold);
+        f.setForeground(QColor("#836FFF"));
+        highlightCaseWord(icoNames.at(i),f,text);
+    }
+    for(int i = 0;i < typeNames.size();i++) //高亮类型名称
+    {
+        QTextCharFormat f;
+        f.setFontWeight(QFont::Bold);
+        f.setForeground(QColor("#8B3E2F"));
+        highlightCaseWord(typeNames.at(i),f,text);
+    }
+    for(int i = 0;i < subControlNames.size();i++)   //高亮子控件名称
+    {
+        QTextCharFormat f;
+        f.setFontWeight(QFont::Bold);
+        f.setForeground(QColor("#CD00CD"));
+        highlightCaseWord(subControlNames.at(i),f,text);
+    }
+    for(int i = 0;i < pseudoStateNames.size();i++)
+    {
+        QTextCharFormat f;
+        f.setFontWeight(QFont::Bold);
+        f.setForeground(QColor("#EE9A49"));
+        highlightCaseWord(pseudoStateNames.at(i),f,text);
+    }*/
 }
 /*
 *高亮一个关键字

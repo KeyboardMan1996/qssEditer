@@ -56,13 +56,17 @@
 #include "qui/codeeditui.h"
 #include "qui/contentui.h"
 #include "docmentui.h"
+#include "versionsmanager.h"
+#include "primaryfaceui.h"
+#include "setting.h"
 int main(int argv, char **args)
 {
     QApplication app(argv, args);
     mainUI ui;
     ui.contentLayout->addWidget(new contentUI(&ui));
     ui.show();
-
+    Setting set;
+    set.init();
     return app.exec();
 }
 

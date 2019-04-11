@@ -3,36 +3,14 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include "database.h"
 
 MatchWordsThread::MatchWordsThread()
 {
-    {       //载入css关键字
-        QFile file("./config/caseWord.txt");
-        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
-        {
-            QTextStream stream(&file);
-            while (!stream.atEnd()) {
-                QString line = stream.readLine();
-                caseWords.append(line);
-             }
-        }
-
-    }
-
-    {       //qt类名
-        QFile file("./config/qtClass.txt");
-        if (file.open(QIODevice::ReadOnly | QIODevice::WriteOnly))
-        {
-            QTextStream stream(&file);
-            while (!stream.atEnd()) {
-                QString line = stream.readLine();
-                caseWords.append(line);
-             }
-        }
-
-    }
-
-
+    Database data;
+    caseWords = data.getClassNames() + data.getIcos() + data.getProperties()
+            + data.getPseudoStates() + data.getSubControls()
+            + data.getType();
 
     qRegisterMetaType<QList<QString>>("QList<QString>");  //注册qlist<qstring> 类 使之可以用于信号与槽的参数传递
 }
