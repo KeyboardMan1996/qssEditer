@@ -1,7 +1,7 @@
 #include "primaryfaceui.h"
 #include "ui_primaryfaceui.h"
-#include "setting.h"
-#include "versionsmanager.h"
+#include "config/setting.h"
+#include "config/versionsmanager.h"
 #include <QDesktopServices>
 
 PrimaryFaceUI::PrimaryFaceUI(QWidget *parent) :

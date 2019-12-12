@@ -2,8 +2,8 @@
 #define PRIMARYFACEUI_H
 
 #include <QWidget>
-#include "versionsmanager.h"
-#include "setting.h"
+#include "config/versionsmanager.h"
+#include "config/setting.h"
 namespace Ui {
 class PrimaryFaceUI;
 }

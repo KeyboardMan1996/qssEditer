@@ -2,7 +2,7 @@
 #define INSERTUI_H
 
 #include <QWidget>
-#include "database.h"
+#include "dataBase/database.h"
 
 namespace Ui {
 class InsertUI;

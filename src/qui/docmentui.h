@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QTableView>
-#include <database.h>
+#include "dataBase/database.h"
 #include "insertui.h"
 
 namespace Ui {

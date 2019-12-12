@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QHBoxLayout>
-#include <setting.h>
+#include <config/setting.h>
 
 namespace Ui {
 class CodeEditUI;

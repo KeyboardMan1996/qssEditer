@@ -226,7 +226,7 @@ background-color: rgb(255, 255, 255);
   <customwidget>
    <class>CodeEditor</class>
    <extends>QPlainTextEdit</extends>
-   <header>codeeditor.h</header>
+   <header>codeEdit/codeeditor.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

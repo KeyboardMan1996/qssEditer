@@ -3,8 +3,8 @@
 
 #include <QWidget>
 #include <QTabWidget>
-#include <qui/codeEditUI.h>
-#include <listwidgetui.h>
+#include "codeEditUI.h"
+#include "listwidgetui.h"
 namespace Ui {
 class contentUI;
 }

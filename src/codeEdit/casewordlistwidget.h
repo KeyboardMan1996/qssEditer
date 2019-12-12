@@ -1,7 +1,7 @@
 #ifndef CASEWORDLISTWIDGET_H
 #define CASEWORDLISTWIDGET_H
 #include <QListWidget>
-#include <codeeditor.h>
+#include "codeeditor.h"
 
 class CaseWordListWidget:public QListWidget
 {

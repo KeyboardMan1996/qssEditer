@@ -58,7 +58,7 @@
 #include <QMutex>
 #include "matchwordsthrea.h"
 #include <QKeyEvent>
-#include <setting.h>
+#include "config/setting.h"
 
 class CaseWordListWidget;
 

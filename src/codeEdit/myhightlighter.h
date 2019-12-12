@@ -4,7 +4,7 @@
 #include <qstring.h>
 #include <qobject.h>
 #include <qlist.h>
-#include "database.h"
+#include "dataBase/database.h"
 
 class myHightLighter:public QSyntaxHighlighter
 {

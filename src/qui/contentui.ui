@@ -27,7 +27,7 @@ background-color: rgb(255, 255, 255);
      <property name="styleSheet">
       <string notr="true">#tab::pane { /* The tab widget frame */
     border-right: 2px solid #C2C7CB;
-	font: 12pt &quot;Agency FB&quot;;
+	font:  &quot;Agency FB&quot; 12pt;
   }
 
 #tab::tab-bar {
@@ -84,8 +84,8 @@ background-color: rgb(255, 255, 255);
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">border: 0px solid rgb(85, 170, 255);
-font: 75 15pt &quot;微软雅黑&quot;;</string>
+           <string notr="true">border:  0px solid  rgb(85, 170, 255);
+font:  15pt 75 &quot;微软雅黑&quot;;</string>
           </property>
           <property name="text">
            <string>首页</string>

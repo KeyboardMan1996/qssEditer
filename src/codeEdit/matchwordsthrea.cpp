@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
-#include "database.h"
+#include "dataBase/database.h"
 
 MatchWordsThread::MatchWordsThread()
 {
