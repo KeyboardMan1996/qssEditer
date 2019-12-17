@@ -50,10 +50,9 @@
 
 #include <QtWidgets>
 #include "qui/mainui.h"
-#include "qui/codeeditui.h"
 #include "qui/contentui.h"
-
-#include "mainwindow.h"
+#include "ui/mainwindow.h"
+#include "project/qssitem.h"
 int main(int argv, char **args)
 {
     QApplication app(argv, args);
@@ -64,6 +63,7 @@ int main(int argv, char **args)
 //    set.init();
     MainWindow w;
     w.show();
+    QssItem i;
     return app.exec();
 }
 

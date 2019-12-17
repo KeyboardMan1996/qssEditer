@@ -10,7 +10,8 @@ INSTALLS += target
 
 
 RESOURCES += \
-    qui/qr.qrc
+    qui/qr.qrc \
+    resource.qrc
 
 RC_ICONS = logo.ico
 
@@ -19,7 +20,6 @@ DISTFILES += \
     qui/images/titile.png
 
 FORMS += \
-    mainwindow.ui \
     qui/codeEditUI.ui \
     qui/contentui.ui \
     qui/docmentui.ui \
@@ -27,10 +27,10 @@ FORMS += \
     qui/listwidgetui.ui \
     qui/mainui.ui \
     qui/primaryfaceui.ui \
-    qui/setconstui.ui
+    qui/setconstui.ui \
+    ui/mainwindow.ui
 
 HEADERS += \
-    mainwindow.h \
     config/setting.h \
     config/versionsmanager.h \
     dataBase/database.h \
@@ -38,6 +38,8 @@ HEADERS += \
     codeEdit/codeeditor.h \
     codeEdit/matchwordsthrea.h \
     codeEdit/myhightlighter.h \
+    project/qssitem.h \
+    project/qssproperty.h \
     qui/codeEditUI.h \
     qui/contentui.h \
     qui/docmentui.h \
@@ -46,11 +48,11 @@ HEADERS += \
     qui/mainui.h \
     qui/primaryfaceui.h \
     qui/setconstui.h \
-    qui/updataui.h
+    qui/updataui.h \
+    ui/mainwindow.h
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
     config/setting.cpp \
     config/versionsmanager.cpp \
     dataBase/database.cpp \
@@ -58,6 +60,8 @@ SOURCES += \
     codeEdit/codeeditor.cpp \
     codeEdit/matchwordsthrea.cpp \
     codeEdit/myhightlighter.cpp \
+    project/qssitem.cpp \
+    project/qssproperty.cpp \
     qui/codeEditUI.cpp \
     qui/contentui.cpp \
     qui/docmentui.cpp \
@@ -66,4 +70,5 @@ SOURCES += \
     qui/mainui.cpp \
     qui/primaryfaceui.cpp \
     qui/setconstui.cpp \
-    qui/updataui.cpp
+    qui/updataui.cpp \
+    ui/mainwindow.cpp

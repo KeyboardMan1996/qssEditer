@@ -39,6 +39,12 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>80</height>
+    </size>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -62,36 +68,62 @@
    <widget class="QWidget" name="dockWidgetContents"/>
   </widget>
   <action name="newFile">
+   <property name="icon">
+    <iconset resource="../resource.qrc">
+     <normaloff>:/resource/ico_new_file.png</normaloff>:/resource/ico_new_file.png</iconset>
+   </property>
    <property name="text">
     <string>新建</string>
    </property>
   </action>
   <action name="openFile">
+   <property name="icon">
+    <iconset resource="../resource.qrc">
+     <normaloff>:/resource/ico_oprn_file.png</normaloff>:/resource/ico_oprn_file.png</iconset>
+   </property>
    <property name="text">
     <string>打开</string>
    </property>
   </action>
   <action name="addFont">
+   <property name="icon">
+    <iconset resource="../resource.qrc">
+     <normaloff>:/resource/ico_add_font.png</normaloff>:/resource/ico_add_font.png</iconset>
+   </property>
    <property name="text">
     <string>添加字体</string>
    </property>
   </action>
   <action name="addColor">
+   <property name="icon">
+    <iconset resource="../resource.qrc">
+     <normaloff>:/resource/ico_add_color.png</normaloff>:/resource/ico_add_color.png</iconset>
+   </property>
    <property name="text">
     <string>添加颜色</string>
    </property>
   </action>
   <action name="setFont">
+   <property name="icon">
+    <iconset resource="../resource.qrc">
+     <normaloff>:/resource/icoi_set_font.png</normaloff>:/resource/icoi_set_font.png</iconset>
+   </property>
    <property name="text">
     <string>设置字体</string>
    </property>
   </action>
   <action name="addIamge">
+   <property name="icon">
+    <iconset resource="../resource.qrc">
+     <normaloff>:/resource/ico_aad_image.png</normaloff>:/resource/ico_aad_image.png</iconset>
+   </property>
    <property name="text">
     <string>添加图片</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

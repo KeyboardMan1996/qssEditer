@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/ico_aad_image.png</file>
+        <file>resource/ico_add_color.png</file>
+        <file>resource/ico_add_font.png</file>
+        <file>resource/ico_new_file.png</file>
+        <file>resource/ico_oprn_file.png</file>
+        <file>resource/ico_save.png</file>
+        <file>resource/icoi_set_font.png</file>
+    </qresource>
+</RCC>

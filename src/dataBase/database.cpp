@@ -49,13 +49,14 @@ void Database::insertIco(const QString &name, const QString &content_e, const QS
 
     erroMessageBox(query,"插入图标名称");
 }
-/*
-*插入属性名称
-* @name 属性名
-* @content_e 英文介绍
-* @content_c 中文介绍
-* @example 示例
-*/
+
+/**
+ * @brief Database::insertProperties  插入qss属性的关键字
+ * @param name  属性关键字
+ * @param content_e 英文介绍
+ * @param content_c 中文介绍
+ * @param example   示例
+ */
 void Database::insertProperties(const QString &name, const QString &content_e, const QString &content_c, const QString &example)
 {
     QSqlQuery query(database);
@@ -67,12 +68,12 @@ void Database::insertProperties(const QString &name, const QString &content_e, c
 
     erroMessageBox(query,"插入属性名称");
 }
-/*
-*插入伪状态
-* @name 伪状态
-* @content_e 英文介绍
-* @content_c 中文介绍
-*/
+/**
+ * @brief Database::insertPseudoStates  插入qss为状态关键字
+ * @param name  关键字
+ * @param content_e 英文介绍
+ * @param content_c 中文介绍
+ */
 void Database::insertPseudoStates(const QString &name, const QString &content_e, const QString &content_c)
 {
     QSqlQuery query(database);
@@ -83,12 +84,12 @@ void Database::insertPseudoStates(const QString &name, const QString &content_e,
 
     erroMessageBox(query,"插入伪状态");
 }
-/*
-*插入子控件
-* @name 子控件名称
-* @content_e 英文介绍
-* @content_c 中文介绍
-*/
+/**
+ * @brief Database::insertSubControls   插入qss子控件名称关键字
+ * @param name  关键字
+ * @param content_e 英文介绍
+ * @param content_c 中文介绍
+ */
 void Database::insertSubControls(const QString &name, const QString &content_e, const QString &content_c)
 {
     QSqlQuery query(database);
